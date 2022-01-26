@@ -114,6 +114,7 @@
     <Compile Include="ado.cs" />
     <Compile Include="AzureUtils.cs" />
     <Compile Include="Comprobante.cs" />
+    <Compile Include="CorreoActual.cs" />
     <Compile Include="Deloitte_XSD.cs" />
     <Compile Include="Donat11.cs" />
     <Compile Include="DSCrgRemProvNotaEntrada.cs" />

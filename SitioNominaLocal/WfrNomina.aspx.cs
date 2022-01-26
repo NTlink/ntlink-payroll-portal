@@ -25,8 +25,6 @@ namespace GafLookPaid
             {
                 try
                 {
-                    DivCfdiRelacionados.Attributes.Add("style", "display:none;");
-
                     this.UCOtrosPagos.Visible = false;
                     this.AgregarDeduccion.Enabled = false;
                     this.txtTotalOtrasDeducciones.Enabled = false;
@@ -67,7 +65,6 @@ namespace GafLookPaid
                         this.DdlCentroTrabajo_OnSelectedIndexChanged(null, null);
                         this.ddlClientes.DataSource = cliente.ListaEmpleados(perfil, idEmpresa, "", false);
                         this.ddlClientes.DataBind();
-                        this.ddlClientes_SelectedIndexChanged(null, null);
                         if (!cliente.TieneConfiguradoCertificado(idEmpresa))
                         {
                             this.lblError.Text = "Tienes que configurar tus certificados antes de poder facturar";
@@ -85,6 +82,12 @@ namespace GafLookPaid
                     this.ViewState["total"] = 0m;
                     this.ViewState["subtotal"] = 0m;
                     this.ViewState["CfdiRelacionado"] = new List<string>();
+                    ViewState["FechaInicioLaboral"] = "";
+                    ViewState["NoSeguridadSocial"] ="";
+                    ViewState["SalarioDiario"] = "";
+
+                    this.ddlClientes_SelectedIndexChanged(null, null);
+
                     if (this.ddlOrigenRecurso.SelectedValue == "IM")
                     {
                         this.txtMontoRecursoPropio.Enabled = true;
@@ -114,20 +117,11 @@ namespace GafLookPaid
 
         protected void btnGenerarFactura_Click(object sender, EventArgs e)
         {
-            mpexFac.Show();
-        }
-
-
-        protected void lnkDeleteFac_Click(object sender, EventArgs e)
-        {
-            btnGenerarFactura.Enabled = false;
-            mpexFac.Hide();
-            up1.Update();
             this.GuardarFactura();
-            btnGenerarFactura.Enabled = true;
-
-
         }
+
+       
+
         protected void ddlEmpresa_SelectedIndexChanged(object sender, EventArgs e)
         {
             string perfil = this.Session["perfil"] as string;
@@ -341,29 +335,43 @@ namespace GafLookPaid
                     string FechaInicioLaboral = this.ViewState["FechaInicioLaboral"].ToString();
                     string NoSeguridadSocial = this.ViewState["NoSeguridadSocial"].ToString();
                     string SalarioDiario = this.ViewState["SalarioDiario"].ToString();
-                    if (string.IsNullOrEmpty(FechaInicioLaboral))
+
+                    //--------------para deja pasar similados a ahonorarios
+                    String Regimen = "";
+
+                    IServicioLocal clienteServicio = NtLinkClientFactory.Cliente();
+                    int idCliente = int.Parse(this.ddlClientes.SelectedValue);
+                    DatosNomina empleado = clienteServicio.ObtenerDatosNomina(idCliente);
+                    if(empleado!=null)
+                        Regimen=  empleado.Regimen;
+                    //-------------------------------------------
+
+                    if (Regimen != "09") //para deja pasar similados a ahonorarios
                     {
-                        this.lblError.Text = "La fecha inicio Laboral debe de existir.";
-                        result = false;
-                        return result;
-                    }
-                    if (string.IsNullOrEmpty(NoSeguridadSocial))
-                    {
-                        this.lblError.Text = "Le numero de seguro social debe de existir.";
-                        result = false;
-                        return result;
-                    }
-                    if (string.IsNullOrEmpty(SalarioDiario))
-                    {
-                        this.lblError.Text = "Le salario diario integrado debe de existir.";
-                        result = false;
-                        return result;
-                    }
-                    if (Convert.ToDateTime(FechaInicioLaboral) > Convert.ToDateTime(this.txtFechaFin.Text))
-                    {
-                        this.lblError.Text = "La fecha Inicio Laboral debe de ser menor o igual a la fecha final";
-                        result = false;
-                        return result;
+                        if (string.IsNullOrEmpty(FechaInicioLaboral))
+                        {
+                            this.lblError.Text = "La fecha inicio Laboral debe de existir.";
+                            result = false;
+                            return result;
+                        }
+                        if (string.IsNullOrEmpty(NoSeguridadSocial))
+                        {
+                            this.lblError.Text = "Le numero de seguro social debe de existir.";
+                            result = false;
+                            return result;
+                        }
+                        if (string.IsNullOrEmpty(SalarioDiario))
+                        {
+                            this.lblError.Text = "Le salario diario integrado debe de existir.";
+                            result = false;
+                            return result;
+                        }
+                        if (Convert.ToDateTime(FechaInicioLaboral) > Convert.ToDateTime(this.txtFechaFin.Text))
+                        {
+                            this.lblError.Text = "La fecha Inicio Laboral debe de ser menor o igual a la fecha final";
+                            result = false;
+                            return result;
+                        }
                     }
                 }
                 this.JubilacionPensionRetiro.ObtenerDatos();
@@ -638,7 +646,8 @@ namespace GafLookPaid
             dto.receptor.Curp = cliente.CURP;
             if (!string.IsNullOrEmpty(datosNomina.NoSeguridadSocial))
             {
-                dto.receptor.NumSeguridadSocial = datosNomina.NoSeguridadSocial;
+                if (!string.IsNullOrEmpty(this.txtRegistroPatronal.Text))//no debe de ir si no existe
+                    dto.receptor.NumSeguridadSocial = datosNomina.NoSeguridadSocial;
             }
             bool flag;
             if (datosNomina.TipoContrato != "09" && datosNomina.TipoContrato != "10" && datosNomina.TipoContrato != "99")
@@ -671,9 +680,10 @@ namespace GafLookPaid
             {
                 dto.receptor.Puesto = datosNomina.Puesto;
             }
-            if (!string.IsNullOrEmpty(this.ddlRiesgoPuesto.SelectedValue))
+           if ((!string.IsNullOrEmpty(this.ddlRiesgoPuesto.SelectedValue)) && ddlRiesgoPuesto.SelectedValue != "0")//
             {
-                dto.receptor.RiesgoPuesto = this.ddlRiesgoPuesto.SelectedValue;
+                if (!string.IsNullOrEmpty(this.txtRegistroPatronal.Text))//no debe de ir si no existe
+                    dto.receptor.RiesgoPuesto = this.ddlRiesgoPuesto.SelectedValue;
             }
             dto.receptor.PeriodicidadPago = this.ddlPeriodicidad.SelectedValue;
             if (!string.IsNullOrEmpty(datosNomina.Banco))
@@ -694,7 +704,8 @@ namespace GafLookPaid
             flag = (1 == 0);
             if (datosNomina.SalarioDiario != 0m)
             {
-                dto.receptor.SalarioDiarioIntegrado = datosNomina.SalarioDiario;
+                if (!string.IsNullOrEmpty(this.txtRegistroPatronal.Text))//no debe de ir si no existe
+                    dto.receptor.SalarioDiarioIntegrado = datosNomina.SalarioDiario;
             }
             dto.receptor.ClaveEntFed = datosNomina.ClaveEntFed;
             dto.receptor.UsoCFDI = "G03";
@@ -1678,11 +1689,8 @@ namespace GafLookPaid
                     percepciones.RemoveAt(id);
                     ViewState["percepciones"] = percepciones;
                     BindDetallesToGridView();
-                    try
-                    {
-                        ddlClave.Items.RemoveAt(id);
-                    }
-                    catch (Exception) { }
+                    ddlClave.Items.RemoveAt(id);
+                   
                     //-------
                    var horasExtras = ViewState["HorasExtra"] as List<HorasExtra>;
                    if (horasExtras != null)
@@ -2250,22 +2258,14 @@ namespace GafLookPaid
         {
             if (!string.IsNullOrEmpty(this.txtUUDI.Text))
             {
-                List<string> CfdiRelacionado = new List<string>();
-                CfdiRelacionado = this.ViewState["CfdiRelacionado"] as List<string>;
-                if (CfdiRelacionado == null)
-                    CfdiRelacionado = new List<string>();
+                List<string> CfdiRelacionado = this.ViewState["CfdiRelacionado"] as List<string>;
                 CfdiRelacionado.Add(this.txtUUDI.Text);
                 this.ViewState["CfdiRelacionado"] = CfdiRelacionado;
                 this.BindCfdiRelacionadoToGridView();
                 this.txtUUDI.Text = "";
             }
         }
-        protected void gvCfdiRelacionado_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            LinkButton lb = e.Row.FindControl("gvlnkDelete") as LinkButton;
-            if (lb != null)
-                ScriptManager.GetCurrent(this).RegisterAsyncPostBackControl(lb);
-        }
+
         protected void gvCfdiRelacionado_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("EliminarCfdiRelacionado"))
@@ -2308,14 +2308,13 @@ namespace GafLookPaid
 
         protected void cbCfdiRelacionados_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbCfdiRelacionados.Checked == true)
+            if (this.cbCfdiRelacionados.Checked)
             {
-                DivCfdiRelacionados.Attributes.Add("style", "display:block;");
+                this.DivCfdiRelacionados.Visible = true;
             }
             else
             {
-                DivCfdiRelacionados.Attributes.Add("style", "display:none;");
-
+                this.DivCfdiRelacionados.Visible = false;
             }
         }
 

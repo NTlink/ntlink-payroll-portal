@@ -119,13 +119,13 @@ namespace ServicioWebNomina
         }
 
         // ServicioWebNomina.ServicioLocal
-        public string CancelarFactura33(string rfcEmisor, string folioFiscal, string expresion, string rfcReceptor)
+        public string CancelarFactura33(string rfcEmisor, string folioFiscal, string expresion, string rfcReceptor,string motivo,string folioSustituto)
         {
             string result;
             try
             {
                 ClienteTimbradoNtlink cliente = new ClienteTimbradoNtlink();
-                string respuesta = cliente.CancelaCfdi(folioFiscal, rfcEmisor, expresion, rfcReceptor);
+                string respuesta = cliente.CancelaCfdi(folioFiscal,motivo,folioSustituto, rfcEmisor, expresion, rfcReceptor);
                 if (!respuesta.StartsWith("<?xml version=\"1.0\"?>"))
                 {
                     throw new FaultException("Error al cancelar el comprobante, " + respuesta);
@@ -150,7 +150,7 @@ namespace ServicioWebNomina
         {
             NtLinkVentas ventas = new NtLinkVentas();
             var lista = ventas.GetById(idFactura);
-            Logger.Debug("Resultado: " + (lista == null));
+            Logger.Debug("Resultado: "+idFactura );
             return lista;
         }
 
@@ -245,7 +245,7 @@ namespace ServicioWebNomina
             if (idempresa == 0)
             {
                 var emps = emp.GetListForLine(linea);
-                Logger.Debug("Resultado: " + emps.Count + " regs.");
+                Logger.Debug("Resultado Linea: " + emps.Count + " regs.");
                 return emps;
             }
             else

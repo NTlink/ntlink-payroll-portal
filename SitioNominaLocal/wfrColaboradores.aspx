@@ -2,12 +2,43 @@
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-   <%-- <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />   
-   --%>
+    <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />   
+   
     
-       <link href="Content/bootstrap.min.css" rel="stylesheet" />
-      <link href="Content/bootstrap.css" rel="stylesheet" />
-      <script src="Scripts/chosen.jquery.js" ></script>
+   
+      
+    <style type="text/css">
+        .auto-style1 {
+            width: 164px;
+        }
+        .auto-style2 {
+            width: 121px;
+        }
+        .auto-style3 {
+            width: 62px;
+        }
+        .auto-style5 {
+            width: 284px;
+        }
+        .auto-style6 {
+            width: 196px;
+        }
+        .auto-style7 {
+            width: 276px;
+        }
+        .auto-style8 {
+            width: 269px;
+        }
+        .auto-style9 {
+            width: 153px;
+        }
+        .auto-style10 {
+            width: 95px;
+        }
+        .page7 {
+            text-align: left;
+        }
+    </style>
    
     
    
@@ -30,155 +61,167 @@
 
         }
     </script>
-
-
-    <div  class = "card mt-2">   
-            <div class="card-header">
-               <h3>Editar Empleado</h3>
-            </div>
-            <div class ="card-body" >
-                  <div class = "row form-group"> 
-            <div class="col-lg-12 " style="color:red;" >
-                            <asp:Label ID="lblError" class="control-label" runat="server" ForeColor="Red" Font-Bold="true" style=" font-size: x-small; text-align: left; font-variant: small-caps;" Width="250px"></asp:Label>
-            </div>
-            </div>
-           
-    
-       <asp:TabContainer runat="server"     ID="cfdTabContainer" Width="100%" 
+    <h1>Editar Empleado</h1>
+    <p>
+        <asp:Label runat="server" ID="lblError" ForeColor="Red" />
+    </p>
+       <asp:TabContainer runat="server"  CssClass="page7"  BorderStyle="Double"   ID="cfdTabContainer" Width="100%" 
         ActiveTabIndex="1" >
-            <asp:TabPanel ID="tabGral" runat="server"  CssClass="page7" HeaderText="Datos del Empleado">
-                <ContentTemplate>
-                    <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label1" runat="server" class="control-label" Text="*Campos requeridos"></asp:Label>
-                    </div>
-                    </div>
-                         <div class = "row">
-                                <div class = "form-group col-lg-10">
-                                 <asp:Label ID="Label2" runat="server" class="control-label" Text="Empresa Emisora de Recibos de Nómina"></asp:Label>
-          <asp:DropDownList runat="server" ID="ddlEmpresa" AppendDataBoundItems="True" DataTextField="RazonSocial" 
-                                    DataValueField="IdEmpresa" CssClass="form-control" >
+            <asp:TabPanel ID="tabGral" runat="server"  CssClass="page2" HeaderText="Datos del Empleado"><ContentTemplate>
+<table class="table-bordered">
+    <tr>
+        <td class="auto-style8">Empresa Emisora de Recibos de Nómina:</td>
+        <td>
+            <asp:DropDownList runat="server" ID="ddlEmpresa" AppendDataBoundItems="True" DataTextField="RazonSocial" 
+                                    DataValueField="IdEmpresa" style="margin-left: 0px" CssClass="form-control2" >
             </asp:DropDownList>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 ControlToValidate="ddlEmpresa" 
-                                ErrorMessage="Emisora de Recibos: Dato requerido" ForeColor="#FF3300">
-            </asp:RequiredFieldValidator>
-       </div>
-                             </div>
+                                ErrorMessage="Emisora de Recibos: Dato requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+        </td>
+    </tr>
+   
+    </asp:Table>
+    <table class="table-bordered">
+     <tr>
+        <td class="auto-style1" style="color: #FF0000" >*Campos requeridos</td>
+    </tr>
+    <tr>
+        <td class="auto-style1">
+            <asp:Label ID="Label59" runat="server" Text="* Número de Empleado:"></asp:Label>
+        </td>
+        <td class="auto-style6">
+            <asp:TextBox ID="txtNumEmpleado0" runat="server" Enabled="False" CssClass="form-control2"></asp:TextBox>
+        </td>
+    
+        <td class="auto-style2">*RFC:</td>
+        <td class="auto-style9">
+            <asp:TextBox runat="server" ID="txtRFC" CssClass="form-control2" />
+            
+        </td>
+          <td class="auto-style10">*CURP:</td>
+        <td>
+            <asp:TextBox runat="server" ID="txtCURP" MaxLength="24"  CssClass="form-control2"/>
+            </td>
+    </tr>
 
-                         <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label3" runat="server" class="control-label" Text="* Número de Empleado"></asp:Label>
-                               <asp:TextBox ID="txtNumEmpleado0" runat="server" Enabled="False" CssClass="form-control"></asp:TextBox>
-                           </div>
-       <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label4" runat="server" class="control-label" Text="* RFC"></asp:Label>
-                                      <asp:TextBox runat="server" ID="txtRFC" CssClass="form-control" />
-           <td class="auto-style9"><asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+    <tr>
+        <td class="auto-style1"></td>
+        <td class="auto-style6"></td>
+         <td class="auto-style2"></td>
+        <td class="auto-style9"><asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
                                 ControlToValidate="txtRFC" ErrorMessage="RFC: Dato inválido" 
-                              
+                                
+                                
                                 ValidationExpression="[A-Z,Ñ,&amp;amp;]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?" 
                                 SetFocusOnError="True" ForeColor="#FF3300"></asp:RegularExpressionValidator>
             &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 ControlToValidate="txtRFC" ErrorMessage="RFC: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
        
-            </div>
-                             <div class = "form-group col-lg-4">
-                                 <asp:Label ID="Label5" runat="server" class="control-label" Text="* CURP"></asp:Label>
-            <asp:TextBox runat="server" ID="txtCURP" MaxLength="24"  CssClass="form-control"/>
-                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+        <td class="auto-style10"></td>
+         <td><asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
                                 ControlToValidate="txtCURP" ErrorMessage="CURP: Dato inválido" 
                                 ValidationExpression="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" ForeColor="#FF3300"></asp:RegularExpressionValidator>
             &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                 ControlToValidate="txtCURP" ErrorMessage="CURP: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-      
-            </div>
-                             </div>
-                       <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label6" runat="server" class="control-label" Text="* Nombres"></asp:Label>
-                      <asp:TextBox ID="txtNombres" runat="server" CssClass="form-control" ></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+        </td>
+    </tr>
+
+   
+    <tr>
+        <td class="auto-style1">*Nombres:</td>
+        <td class="auto-style6">
+            <asp:TextBox ID="txtNombres" runat="server" CssClass="form-control2" Width="170px"></asp:TextBox>
+           
+        </td>
+        <td class="auto-style2">*Apellido Paterno</td>
+        <td class="auto-style9">
+            <asp:TextBox ID="txtApellidoPaterno" runat="server" CssClass="form-control2" Width="170px"></asp:TextBox>
+           
+        </td>
+         <td class="auto-style10" >*Apellido Materno:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td >
+            <asp:TextBox runat="server" ID="txtApellidoMaterno" CssClass="form-control2" Width="170px" />
+                </td>
+    </tr>
+    <tr>
+        <td class="auto-style1"></td>
+        <td class="auto-style6"> <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                 ControlToValidate="txtNombres" 
-                                ErrorMessage="Nombres: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                       </div>
-                              <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label7" runat="server" class="control-label" Text="* Apellido Paterno"></asp:Label>
-                     <asp:TextBox ID="txtApellidoPaterno" runat="server" CssClass="form-control" ></asp:TextBox>
-                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" 
+                                ErrorMessage="Nombres: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+        <td class="auto-style2"></td>
+        <td class="auto-style9"> <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" 
                                 ControlToValidate="txtApellidoPaterno" 
-                                ErrorMessage="Apellido paterno: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-           </div>
-                               <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label8" runat="server" class="control-label" Text="* Apellido Materno"></asp:Label>
-                               <asp:TextBox runat="server" ID="txtApellidoMaterno" CssClass="form-control" />
-                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" 
+                                ErrorMessage="Apellido paterno: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+    
+    <td class="auto-style10"></td>
+
+          <td>    <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" 
                                 ControlToValidate="txtApellidoMaterno" 
-                                ErrorMessage="Apellido materno: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                </div>
-                           </div>
-                       <div class = "row">
-                                <div class = "form-group col-lg-4">
-                                 <asp:Label ID="Label9" runat="server" class="control-label" Text="* Email"></asp:Label>
-                                  <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" />
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                ErrorMessage="Apellido materno: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+    </tr>
+
+    
+    <tr>
+        <td class="auto-style1">*Email:</td>
+        <td class="auto-style6">
+            <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control2" Width="170px" />
+           
+        </td>
+        <td class="auto-style2">Bcc:</td>
+        <td style="margin-left: 40px" class="auto-style9">
+            <asp:TextBox ID="txtBcc" runat="server" CssClass="form-control2" Width="170px"></asp:TextBox></td>
+    </tr>
+
+    <tr>
+        <td class="auto-style1"></td>
+        <td class="auto-style6"> <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                                 ControlToValidate="txtEmail" ErrorMessage="Email: Dato inválido" 
                                 ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ForeColor="#FF3300"></asp:RegularExpressionValidator>
             &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
-                                ControlToValidate="txtEmail" ErrorMessage="Email: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                               </div>
-                               <div class = "form-group col-lg-4">
-                                 <asp:Label ID="Label11" runat="server" class="control-label" Text="Bcc"></asp:Label>
-                              <asp:TextBox ID="txtBcc" runat="server" CssClass="form-control" ></asp:TextBox>
-                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                                ControlToValidate="txtEmail" ErrorMessage="Email: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+   
+       <td class="auto-style2"></td>
+         <td class="auto-style9"> <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
                                 ControlToValidate="txtBcc" ErrorMessage="BCC:  Dato inválido" 
-                                ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ForeColor="#FF3300"></asp:RegularExpressionValidator>
-                                   </div>
-                           </div>
+                                ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" ForeColor="#FF3300"></asp:RegularExpressionValidator></td>
+         </tr>
 
-            
-                    <br />
-                       <div class = "row">
-                                <div class = "form-group col-lg-4">
-                                 <asp:Label ID="Label18" runat="server" class="control-label" Text="RfcLabora"></asp:Label>
-            <asp:TextBox ID="txtRfcLabora" runat="server" CssClass="form-control" ></asp:TextBox>
+   
+    <tr>
+        <td colspan="2"><hr width="100%" align="left"> </td>
+
+    </tr>
+    <tr>
+        <td style="text-align: right" class="auto-style1">RfcLabora</td>
+        <td class="auto-style6">
+            <asp:TextBox ID="txtRfcLabora" runat="server" CssClass="form-control2" Width="170px"></asp:TextBox>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
                                 ControlToValidate="txtRfcLabora" ErrorMessage="RfcLabora: Dato inválido" 
                                 ValidationExpression="[A-Z&amp;Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]" ForeColor="#FF3300"></asp:RegularExpressionValidator>
             &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"  ValidationGroup="AgregarSubContratacion"
                                 ControlToValidate="txtRfcLabora" ErrorMessage="RfcLabora: Campo requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                        </div>
-                                  <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label21" runat="server" class="control-label" Text="PorcentajeTiempo"></asp:Label>
-            <asp:TextBox ID="txtPorcentajeTiempo" runat="server" CssClass="form-control"></asp:TextBox>
-                                       <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" runat="server" FilterType="Custom, Numbers"
+    
+        </td>
+    
+        <td style="text-align: right" class="auto-style2">PorcentajeTiempo</td>
+        <td class="auto-style9">
+            <asp:TextBox ID="txtPorcentajeTiempo" runat="server" CssClass="form-control2"></asp:TextBox>
+
+              <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" runat="server" FilterType="Custom, Numbers"
     ValidChars="." TargetControlID="txtPorcentajeTiempo" BehaviorID="_content_FilteredTextBoxExtender3" />
     <asp:RegularExpressionValidator id="RegularExpressionValidator12" runat="server" Display="Dynamic"
     ControlToValidate="txtPorcentajeTiempo" ErrorMessage="Dato invalido" ValidationExpression="\d+\.?\d?\d?\d?" ValidationGroup="AgregarSubContratacion" ForeColor="#FF3300"/>
   
-                                      </div>
-                           </div>
-                <div class = "row">
-                                <div class = "form-group col-lg-3">
-                    
-    <asp:Button runat="server" Text="Agregar SubContratacion" ID="btnAgregarSubContratacion" 
-        ValidationGroup="AgregarSubContratacion" OnClick="btnAgregarSubContratacion_Click" 
-        CssClass="btn btn-outline-success" />
-         </div>
-                    </div>
-                    <br />
-            
-                    <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                        <asp:GridView ID="GridSubContratacion" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Left"
-                             RowStyle-HorizontalAlign="Left"          onrowcommand="GridSubContratacion_RowCommand" 
-                            CssClass="table table-hover table-striped grdViewTable"    >
-                                 <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                            
-                     <EmptyDataTemplate>
-            No se encontraron registros.
-        </EmptyDataTemplate>
-                                        
+        </td>
+  
+        <td colspan="2">
+    <asp:Button runat="server" Text="Agregar SubContratacion" ID="btnAgregarSubContratacion" ValidationGroup="AgregarSubContratacion" OnClick="btnAgregarSubContratacion_Click" class="btn btn-primary" Width="185px"/>
+          <br />
+            </table>
+                <table>
+              <asp:GridView runat="server" ID="GridSubContratacion" AutoGenerateColumns="False" CssClass="page3"
+			Width="100%" ShowHeaderWhenEmpty="True" OnRowCommand="GridSubContratacion_RowCommand" >
 			<Columns>
 				<asp:BoundField HeaderText="RfcLabora" DataField="RfcLabora" >
 				<ItemStyle HorizontalAlign="Center" />
@@ -187,96 +230,161 @@
 				  <asp:ButtonField Text="Eliminar" CommandName="Eliminar" HeaderText="Eliminar"/>
 			</Columns>
 		</asp:GridView>
-       </div>
+            </td>
+        </tr>
 
-                <div class = "row">
-                                <div class = "form-group col-lg-12">
+    <tr>
+        <td class="auto-style3">
             <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="#FF3300"></asp:ValidationSummary>
-        </div>
-                    </div>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
 </ContentTemplate>
 </asp:TabPanel>
     
-            <asp:TabPanel ID="TabPanel1" runat="server"  CssClass="page2"   HeaderText="Datos Nómina">
-                <ContentTemplate>
-<asp:UpdatePanel ID="UpdatePanel1"     runat="server">
-    <ContentTemplate>
-                
-         <div class = "row">
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label22" runat="server" class="control-label" Text="* Número de Empleado"></asp:Label>
-              <asp:TextBox ID="txtNumEmpleado" runat="server" Enabled="False" CssClass="form-control"></asp:TextBox>
-                <asp:Label ID="lblNumEmpleado" runat="server" ForeColor="Red"></asp:Label>
-           </div>
-             <div class = "form-group col-lg-3">
-           <asp:Label ID="Label10" runat="server" class="control-label" Text="NSS"></asp:Label>
-              <asp:TextBox ID="txtNumSeguridadSocial" runat="server" MaxLength="15" CssClass="form-control"></asp:TextBox>
-                   <asp:Label ID="lblNumSeguridadSocial" runat="server" ForeColor="Red"></asp:Label>
+            <asp:TabPanel ID="TabPanel1" runat="server"  CssClass="page2"   HeaderText="Datos Nómina"><ContentTemplate>
+<asp:UpdatePanel ID="UpdatePanel1"     runat="server"><ContentTemplate>
+        <table>
+            <tr>    <td>
+                    <h3>
+                        <asp:Label ID="Label58" runat="server"  Text="Datos de Nómina"></asp:Label>
+                    </h3>
+                </td>
+            </tr>
+          
+       </table> 
+    <table class="table-hover" >
+              <tr>
+                <td style="text-align: right">
+                    <asp:Label ID="Label10" runat="server" Text="*Número de Empleado:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtNumEmpleado" runat="server" Enabled="False" CssClass="form-control2"></asp:TextBox>
+                    
+                    <asp:Label ID="lblNumEmpleado" runat="server" ForeColor="Red"></asp:Label>
+                </td>
+         
+                <td style="text-align: right">
+                    <asp:Label ID="Label13" runat="server" Text="NSS:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtNumSeguridadSocial" runat="server" MaxLength="15" CssClass="form-control2"></asp:TextBox>
+                 
+                </td>
+                 <td style="text-align: right">
+                    <asp:Label ID="Label15" runat="server" Text="CLABE:"></asp:Label>
+                </td>
+                <td  >
+                    <asp:TextBox ID="txtClabe" runat="server" CssClass="form-control2"
+                        onchange="SeleccionaBanco()"></asp:TextBox>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>   
+                    <asp:Label ID="lblNumSeguridadSocial" runat="server" ForeColor="Red"></asp:Label>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" 
                         ControlToValidate="txtNumSeguridadSocial" 
                         ErrorMessage="Dato inválido" 
                         ValidationExpression="[0-9]{1,15}" ForeColor="#FF3300"></asp:RegularExpressionValidator>
-                 </div>
-             <div class = "form-group col-lg-3">
-           <asp:Label ID="Label13" runat="server" class="control-label" Text="CLABE"></asp:Label>
-                    <asp:TextBox ID="txtClabe" runat="server" CssClass="form-control"
-                        onchange="SeleccionaBanco()"></asp:TextBox>
-                 <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
+
+                </td>
+                <td></td>
+                <td><asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
                         ControlToValidate="txtClabe" ErrorMessage="Dato inválido" 
                         ValidationExpression="[0-9]{10,18}" ForeColor="#FF3300"></asp:RegularExpressionValidator>
-                                        <asp:Label ID="lblClabe" runat="server" ForeColor="Red"></asp:Label>
-                </div>
-             </div>
-      <div class = "row">
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label15" runat="server" class="control-label" Text="* Fecha inicio laboral"></asp:Label>
-                    <asp:TextBox ID="txtFechaInicialLaboral" runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:CalendarExtender ID="calExt" runat="server" Enabled="True" 
-                        Format="yyyy-MM-dd" TargetControlID="txtFechaInicialLaboral">
-                    </asp:CalendarExtender>
-              <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" 
+                                        <asp:Label ID="lblClabe" runat="server" ForeColor="Red"></asp:Label></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right">
+                    <asp:Label ID="Label17" runat="server" Text="*Fecha inicio laboral:"></asp:Label>
+                </td>
+                <td class="auto-style5" >
+                    <asp:TextBox ID="txtFechaInicialLaboral" runat="server" CssClass="form-control2"></asp:TextBox>
+                     <asp:CompareValidator runat="server" ID="cvFechaInicial" 
+                    ControlToValidate="txtFechaInicialLaboral" Display="Dynamic" 
+				 ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
+				<asp:CalendarExtender runat="server" ID="ceFechaInicial" Animated="False"
+                    PopupButtonID="txtFechaInicialLaboral" TargetControlID="txtFechaInicialLaboral" Format="yyyy-MM-dd" />
+
+                   
+                </td>
+                 <td style="text-align: right" >
+                    <asp:Label ID="Label19" runat="server" Text="Puesto:"></asp:Label>
+                </td>
+                <td >
+                    <asp:TextBox ID="txtPuesto" runat="server" CssClass="form-control2"></asp:TextBox> </td>
+            <td style="text-align: right">*<asp:Label ID="Label60" runat="server" Text="Cuota Diaria" style="text-align: right"></asp:Label>
+                    :</td>
+                <td>
+                    <asp:TextBox ID="txtCuotaDiaria" runat="server" CssClass="form-control2">0</asp:TextBox>
+                    </td>
+            </tr>
+           <tr>
+               <td> <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" 
                         ControlToValidate="txtFechaInicialLaboral" 
-                        ErrorMessage="Campo requerido" SetFocusOnError="True" ForeColor="#FF3300"></asp:RequiredFieldValidator><asp:Label ID="lblFechaInicialLaboral" runat="server" ForeColor="Red"></asp:Label>
+                        ErrorMessage="Campo requerido" SetFocusOnError="True" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+               <td> <asp:Label ID="lblFechaInicialLaboral" runat="server" ForeColor="Red"></asp:Label>
                   
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
                         ControlToValidate="txtFechaInicialLaboral" 
                         ErrorMessage="Dato inválido" 
-                        ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])" ForeColor="#FF3300"></asp:RegularExpressionValidator>
-                   </div>
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label17" runat="server" class="control-label" Text="Puesto"></asp:Label>
-            <asp:TextBox ID="txtPuesto" runat="server" CssClass="form-control"></asp:TextBox> 
-              <asp:Label ID="lblPuesto" runat="server" ForeColor="Red"></asp:Label>
-            </div>
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label19" runat="server" class="control-label" Text="* Cuota Diaria"></asp:Label>
-                       <asp:TextBox ID="txtCuotaDiaria" runat="server" CssClass="form-control">0</asp:TextBox>
-              <asp:Label ID="lblCuotaDiaria" runat="server" ForeColor="Red"></asp:Label>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ControlToValidate="txtCuotaDiaria" 
-                        ErrorMessage="Campo requerido" SetFocusOnError="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>     
-            </div>
-          </div>
-        <div class = "row">
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label24" runat="server" class="control-label" Text="Salario Base Cotización"></asp:Label>
-              <asp:TextBox ID="txtSalarioBaseCotApor" runat="server" CssClass="form-control">0</asp:TextBox>
-              <asp:Label ID="lblSalarioBaseCotApor" runat="server" ForeColor="Red"></asp:Label>
-                 </div>
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label23" runat="server" class="control-label" Text="Salario Diario Integrado"></asp:Label>
-              <asp:TextBox ID="txtSalarioDiarioIntegro" runat="server" CssClass="form-control">0</asp:TextBox>
-              <asp:Label ID="lblSalarioDiarioIntegro" runat="server" ForeColor="Red"></asp:Label>
-                </div>
-           <div class = "form-group col-lg-3">
-           <asp:Label ID="Label25" runat="server" class="control-label" Text="Departamento"></asp:Label>
-                 <asp:TextBox ID="txtDepartamento" runat="server" CssClass="form-control"></asp:TextBox>
-               <asp:Label ID="lblDepartamento" runat="server" ForeColor="Red"></asp:Label>
-               </div>
-            </div>
-           <div class = "row">
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label14" runat="server" class="control-label" Text="* Tipo de Régimen"></asp:Label>
-                             <asp:DropDownList ID="ddlRegimen" runat="server" CssClass="form-control">
+                        ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])" ForeColor="#FF3300"></asp:RegularExpressionValidator></td>
+          
+               <td></td>
+               <td><asp:Label ID="lblPuesto" runat="server" ForeColor="Red"></asp:Label></td>
+            
+                <td class="auto-style7"></td>
+                <td class="auto-style5"><asp:Label ID="lblCuotaDiaria" runat="server" ForeColor="Red"></asp:Label>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ControlToValidate="txtCuotaDiaria" ErrorMessage="Campo requerido" SetFocusOnError="True" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right" class="auto-style7" >
+                    <asp:Label ID="Label23" runat="server" Text="Salario Base Cotización"></asp:Label>
+                    :</td>
+                <td class="auto-style5" >
+                    <asp:TextBox ID="txtSalarioBaseCotApor" runat="server" CssClass="form-control2">0</asp:TextBox>
+                 </td>
+                <td style="text-align: right" >
+                    <asp:Label ID="Label25" runat="server" Text="Salario Diario Integrado:"></asp:Label>
+                </td>
+                <td >
+                    <asp:TextBox ID="txtSalarioDiarioIntegro" runat="server" CssClass="form-control2">0</asp:TextBox>
+                
+                </td>
+                 <td style="text-align: right" class="auto-style7" >
+                    <asp:Label ID="Label14" runat="server" Text="Departamento:"></asp:Label>
+                </td>
+                <td class="auto-style5">
+                    <asp:TextBox ID="txtDepartamento" runat="server" CssClass="form-control2"></asp:TextBox> </td>
+            </tr>
+            <tr>
+                <td class="auto-style7"></td>
+                <td class="auto-style5">   <asp:Label ID="lblSalarioBaseCotApor" runat="server" ForeColor="Red"></asp:Label>
+                    
+                </td>
+                <td></td>
+                <td><asp:Label ID="lblSalarioDiarioIntegro" runat="server" ForeColor="Red"></asp:Label></td>
+                <td></td>
+                <td><asp:Label ID="lblDepartamento" runat="server" ForeColor="Red"></asp:Label></td>
+            </tr>
+
+
+
+
+
+            
+            <tr>
+               <td class="auto-style7" style="text-align: right">
+                        <asp:Label ID="Label12" runat="server" Text="*Tipo de Régimen:"></asp:Label>
+                    </td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlRegimen" runat="server" CssClass="form-control2" style="margin-left: 0px" Width="200px">
                             <asp:ListItem Text="Sueldos" Value="02"></asp:ListItem>
                             <asp:ListItem Text="Jubilados" Value="03"></asp:ListItem>
                             <asp:ListItem Text="Pensionados" Value="04"></asp:ListItem>
@@ -291,15 +399,12 @@
                        <asp:ListItem Text="Indemnización o Separación" Value="13"></asp:ListItem>
                         <asp:ListItem Text="Otro Regimen" Value="99"></asp:ListItem>
                         </asp:DropDownList>
-              <asp:Label ID="lblRegimen" runat="server" ForeColor="Red"></asp:Label>
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server"
-                       ControlToValidate="ddlRegimen" ErrorMessage="Campo requerido" ForeColor="#FF3300"
-                       SetFocusOnError="True"></asp:RequiredFieldValidator>
-
-             </div>
-                 <div class = "form-group col-lg-3">
-           <asp:Label ID="Label12" runat="server" class="control-label" Text="* Tipo de Contrato"></asp:Label>
-                     <asp:DropDownList ID="ddlTipoContrato" runat="server" AutoPostBack="True" CssClass="form-control" onselectedindexchanged="ddlTipoContrato_SelectedIndexChanged" style="margin-left: 0px">
+                        </td> 
+               <td class="auto-style7" style="text-align: right">
+                        <asp:Label ID="Label20" runat="server" Text="*Tipo de Contrato:"></asp:Label>
+                    </td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlTipoContrato" runat="server" AutoPostBack="True" CssClass="form-control2" onselectedindexchanged="ddlTipoContrato_SelectedIndexChanged" style="margin-left: 0px">
                             <asp:ListItem Text="Contrato de trabajo por tiempo indeterminado" Value="01"></asp:ListItem>
                             <asp:ListItem Text="Contrato de trabajo para obra determinada" Value="02"></asp:ListItem>
                             <asp:ListItem Text="Contrato de trabajo por tiempo determinado" Value="03"></asp:ListItem>
@@ -312,13 +417,26 @@
                             <asp:ListItem Text="Jubilación, pensión, retiro" Value="10"></asp:ListItem>
                             <asp:ListItem Text="Otro contrato" Value="99"></asp:ListItem>
                         </asp:DropDownList>
-                     <asp:Label ID="lblTipoContrato" runat="server" Enabled="False" ForeColor="Red"></asp:Label>
+                    </td>
+                </tr>
+            
+            <tr>
+                <td></td>
+                <td><asp:Label ID="lblRegimen" runat="server" ForeColor="Red"></asp:Label>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="ddlRegimen" ErrorMessage="Campo requerido" ForeColor="#FF3300" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                   </td>
+          <td></td>
+               
+                <td>
+                        <asp:Label ID="lblTipoContrato" runat="server" Enabled="False" ForeColor="Red"></asp:Label>
+                    </td>
                  
-               </div>
-             
-               <div class = "form-group col-lg-3">
-           <asp:Label ID="Label20" runat="server" class="control-label" Text="* Tipo de Jornada"></asp:Label>
-                 <asp:DropDownList ID="ddlTipoJornada" runat="server" ClientIDMode="Static" CssClass="form-control">
+                 </tr>
+            <caption>
+                <tr>
+                     <td class="auto-style7" style="text-align: right">*Tipo de Jornada:</td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlTipoJornada" runat="server" ClientIDMode="Static" CssClass="form-control2" style="margin-left: 0px">
                             <asp:ListItem Text="Diurna" Value="01"></asp:ListItem>
                             <asp:ListItem Text="Nocturna" Value="02"></asp:ListItem>
                             <asp:ListItem Text="Mixta" Value="03"></asp:ListItem>
@@ -329,16 +447,13 @@
                             <asp:ListItem Text="Por turnos" Value="08"></asp:ListItem>
                             <asp:ListItem Text="Otra Jornada" Value="99"></asp:ListItem>
                         </asp:DropDownList>
-                   <asp:RequiredFieldValidator ID="valOtro0" runat="server" ClientIDMode="Static"
-                       ControlToValidate="ddlTipoJornada" Enabled="False" ErrorMessage="Campo Requerido"
-                       ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                
-             </div>
-               </div>
-           <div class = "row">
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label26" runat="server" class="control-label" Text="Banco"></asp:Label>
-                 <asp:DropDownList ID="ddlBanco" runat="server" ClientIDMode="Static" CssClass="form-control">
+                       
+                    </td>
+                    <td style="text-align: right">
+                        <asp:Label ID="Label16" runat="server" Text="Banco:"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlBanco" runat="server" ClientIDMode="Static" CssClass="form-control2" style="margin-left: 0px">
                             <asp:ListItem Selected="True" Text="Selecciona un banco" Value="000"></asp:ListItem>
                             <asp:ListItem Text="BANAMEX " Value="002"></asp:ListItem>
                             <asp:ListItem Text="BANCOMEXT " Value="006"></asp:ListItem>
@@ -432,11 +547,23 @@
                             <asp:ListItem Text="INDEVAL " Value="902"></asp:ListItem>
                             <asp:ListItem Text="LIBERTAD " Value="670"></asp:ListItem>
                         </asp:DropDownList>
-                       <asp:Label ID="lblBanco" runat="server" ForeColor="Red"></asp:Label>
-                 </div>   
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label16" runat="server" class="control-label" Text="* ClaveEntFed"></asp:Label>
-                      <asp:DropDownList ID="ddlClaveEntFed" runat="server" ClientIDMode="Static" CssClass="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style7"></td>
+                    
+                  <td<asp:RequiredFieldValidator ID="valOtro0" runat="server" ClientIDMode="Static" ControlToValidate="ddlTipoJornada" Enabled="False" ErrorMessage="Campo Requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator></td>
+                      
+                    <td class="auto-style5">
+                        <asp:Label ID="lblBanco" runat="server" ForeColor="Red"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    
+                    
+                       <td class="auto-style7" style="text-align: right">*ClaveEntFed:</td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlClaveEntFed" runat="server" ClientIDMode="Static" CssClass="form-control2" style="margin-left: 0px">
                             <asp:ListItem Text="CDMX" Value="DIF"></asp:ListItem>
                             <asp:ListItem Text="Aguascalientes" Value="AGU"></asp:ListItem>
                             <asp:ListItem Text="Baja California" Value="BCN"></asp:ListItem>
@@ -533,21 +660,44 @@
                             <asp:ListItem Text="&nbsp;Yukón" Value="YT"></asp:ListItem>
                             <asp:ListItem Text="&nbsp;Nunavut" Value="UN"></asp:ListItem>
                         </asp:DropDownList>
-            </div>
-          <div class = "form-group col-lg-3">
-           <asp:Label ID="Label27" runat="server" class="control-label" Text="Sindicalizado"></asp:Label>
-                    <asp:DropDownList ID="ddlSindicalizado" runat="server" ClientIDMode="Static" CssClass="form-control">
+                      
+                    </td>
+                </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+                <tr>
+                                
+                    <td class="auto-style7" style="text-align: right">Sindicalizado:</td>
+                    <td class="auto-style5">
+                        <asp:DropDownList ID="ddlSindicalizado" runat="server" ClientIDMode="Static" CssClass="form-control2">
                             <asp:ListItem Text="No" Value="No"></asp:ListItem>
                             <asp:ListItem Text="Sí" Value="Sí"></asp:ListItem>
                         </asp:DropDownList>
-             </div>
-               </div>
-           <div class = "row">
-          <div class = "form-group col-lg-12">
-        
-               <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="color: #FF0000" />
-          </div>
-               </div>
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style7" style="text-align: right"></td>
+                    <td class="auto-style5">
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="auto-style7">
+                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" style="color: #FF0000" />
+                    </td>
+                    <td class="auto-style5">
+                        <br />
+                    </td>
+                </tr>
+            </caption>
+            
+        </table>
+    
 </ContentTemplate>
 </asp:UpdatePanel>
 
@@ -561,10 +711,8 @@
     
     
     <div align="right">
-        <asp:Button runat="server" ID="btnSave" CssClass="btn btn-outline-success" Text="Guardar" onclick="btnSave_Click" />&nbsp;&nbsp;
-        <asp:Button runat="server" ID="btnCancel" CssClass="btn btn-outline-success"  Text="Cancelar" 
+        <asp:Button runat="server" ID="btnSave" class="btn btn-primary" Text="Guardar" onclick="btnSave_Click" />&nbsp;&nbsp;
+        <asp:Button runat="server" ID="btnCancel" class="btn btn-primary"  Text="Cancelar" 
             onclick="btnCancel_Click" CausesValidation="False" />
     </div>
-                </div>
-        </div>
 </asp:Content>

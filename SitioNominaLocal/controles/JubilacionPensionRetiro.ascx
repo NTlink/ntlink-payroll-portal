@@ -1,10 +1,34 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="JubilacionPensionRetiro.ascx.cs" Inherits="SitioNominaLocal.controles.JubilacionPensionRetiro" %>
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 
-<div class = "row">
-     <div class = "form-group col-lg-3">
-         <asp:Label ID="lblTotalSueldos" runat="server" class="control-label" Text="IngresoAcumulable"></asp:Label>
-                <asp:TextBox ID="txtIngresoAcumulable" runat="server" CssClass="form-control"></asp:TextBox>
+
+<style type="text/css">
+    .auto-style1 {
+        text-align: left;
+    }
+    .auto-style2 {
+        text-align: left;
+        width: 136px;
+    }
+    .auto-style3 {
+        width: 278px;
+    }
+    .auto-style4 {
+        text-align: left;
+        width: 278px;
+    }
+    .auto-style5 {
+        text-align: left;
+        width: 144px;
+    }
+</style>
+
+
+<table style="width:100%" >
+    <tr>
+                        <td class="auto-style2" >IngresoAcumulable</td>
+                        <td style="text-align: left" class="auto-style3" >
+                            <asp:TextBox ID="txtIngresoAcumulable" runat="server" Width="100px"></asp:TextBox>
         <asp:FilteredTextBoxExtender ID="txtIngresoAcumulable_FilteredTextBoxExtender" 
             runat="server" FilterType="Numbers, Custom"
     ValidChars="." TargetControlID="txtIngresoAcumulable" />
@@ -13,10 +37,11 @@
   
                              <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ErrorMessage="Requerido" Display="Dynamic"
               ControlToValidate="txtIngresoAcumulable" ValidationGroup="CrearFactura" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-     </div>
-     <div class = "form-group col-lg-3">
-         <asp:Label ID="Label1" runat="server" class="control-label" Text="IngresoNoAcumulable"></asp:Label>
-                   <asp:TextBox ID="txtIngresoNoAcumulable" runat="server"  CssClass="form-control"></asp:TextBox>
+     
+                             </td>
+                        <td class="auto-style5">IngresoNoAcumulable</td>
+                        <td style="text-align: left">
+                            <asp:TextBox ID="txtIngresoNoAcumulable" runat="server" Width="100px"></asp:TextBox>
                                  <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" 
             runat="server" FilterType="Numbers, Custom"
     ValidChars="." TargetControlID="txtIngresoNoAcumulable" />
@@ -26,37 +51,45 @@
                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ErrorMessage="Requerido" Display="Dynamic"
               ControlToValidate="txtIngresoNoAcumulable" ValidationGroup="CrearFactura" ForeColor="#FF3300"></asp:RequiredFieldValidator>
                 
-       </div>
-    <div class = "form-group col-lg-3">
-         <asp:Label ID="Label2" runat="server" class="control-label" Text="TotalUnaExhibicion"></asp:Label>
-                            <asp:TextBox ID="txtTotalUnaExhibicion" runat="server" CssClass="form-control"></asp:TextBox>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="auto-style2" >TotalUnaExhibicion</td>
+                        <td class="auto-style4" style="text-align: left">
+                            <asp:TextBox ID="txtTotalUnaExhibicion" runat="server" Width="100px"></asp:TextBox>
                                  <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" 
             runat="server" FilterType="Numbers, Custom"
     ValidChars="." TargetControlID="txtTotalUnaExhibicion" />
     <asp:RegularExpressionValidator id="RegularExpressionValidator2" runat="server" Display="Dynamic"
     ControlToValidate="txtTotalUnaExhibicion" ErrorMessage="Dato invalido" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura" ForeColor="#FF3300"/>
-  </div>
-    </div>
-<div class = "row">
-     <div class = "form-group col-lg-3">
-         <asp:Label ID="Label3" runat="server" class="control-label" Text="TotalParcialidad"></asp:Label>
-               <asp:TextBox ID="txtTotalParcialidad" runat="server" CssClass="form-control"></asp:TextBox>
+  
+                        </td>
+                        <td class="auto-style5" >TotalParcialidad</td>
+                        <td class="auto-style1" style="text-align: left">
+                            <asp:TextBox ID="txtTotalParcialidad" runat="server" Width="100px"></asp:TextBox>
                               <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" 
             runat="server" FilterType="Numbers, Custom"
     ValidChars="." TargetControlID="txtTotalParcialidad" />
     <asp:RegularExpressionValidator id="RegularExpressionValidator3" runat="server" Display="Dynamic"
     ControlToValidate="txtTotalParcialidad" ErrorMessage="Dato invalido" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura" ForeColor="#FF3300"/>
   
-  </div>
-     <div class = "form-group col-lg-3">
-         <asp:Label ID="Label4" runat="server" class="control-label" Text="MontoDiario"></asp:Label>
-                   <asp:TextBox ID="txtMontoDiario" runat="server" CssClass="form-control" ></asp:TextBox>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="auto-style2" >MontoDiario</td>
+                        <td style="text-align: left" class="auto-style3">
+                            <asp:TextBox ID="txtMontoDiario" runat="server" Width="100px" ></asp:TextBox>
                              <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" 
             runat="server" FilterType="Numbers, Custom"
     ValidChars="." TargetControlID="txtMontoDiario" />
     <asp:RegularExpressionValidator id="RegularExpressionValidator5" runat="server" Display="Dynamic"
     ControlToValidate="txtMontoDiario" ErrorMessage="Dato invalido" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura" ForeColor="#FF3300"/>
   
-          </div>
-    </div>
+                        </td>
+                        
+
+                    </tr>
+</table>
 <hr width="100%" align="left"> 

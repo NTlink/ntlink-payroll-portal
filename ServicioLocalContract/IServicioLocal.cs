@@ -68,7 +68,7 @@ namespace ServicioLocalContract
 		void EnviarFactura(string rfc, string folioFiscal, List<string> rec, List<string> bcc);
         [OperationContract]
 
-        string CancelarFactura33(string rfcEmisor, string folioFiscal, string expresion, string rfcReceptor);
+        string CancelarFactura33(string rfcEmisor, string folioFiscal, string expresion, string rfcReceptor, string motivo, string folioSustituto);
        
         [OperationContract]
 		string CancelarFactura(string rfc, string folioFiscal);

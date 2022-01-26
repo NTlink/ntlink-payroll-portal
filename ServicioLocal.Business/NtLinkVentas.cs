@@ -254,7 +254,7 @@ namespace ServicioLocal.Business
                     {
                         return lista;
                     }
-                    return lista.Where(p => p.StatusFactura == status).ToList();
+                    return lista.Where(p => p.StatusFactura == status).ToList(); 
                 }
             }
             catch (Exception eee)
