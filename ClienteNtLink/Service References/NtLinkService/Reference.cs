@@ -19,7 +19,7 @@ namespace ClienteNtLink.NtLinkService {
         string TimbraCfdi(string comprobante);
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/CancelaCfdi", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/CancelaCfdiResponse")]
-        string CancelaCfdi(string uuid, string rfcEmisor, string expresion, string rfcReceptor);
+        string CancelaCfdi(string uuid, string motivo, string folioSustituto, string rfcEmisor, string expresion, string rfcReceptor);
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/CancelaRetencion", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/CancelaRetencionResponse")]
         string CancelaRetencion(string uuid, string rfc);
@@ -32,6 +32,9 @@ namespace ClienteNtLink.NtLinkService {
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/ConsultaEstatusCFDI", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/ConsultaEstatusCFDIResponse")]
         string ConsultaEstatusCFDI(string expresion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/TimbraRetencion", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/TimbraRetencionResponse")]
+        string TimbraRetencion(string comprobante);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -65,8 +68,8 @@ namespace ClienteNtLink.NtLinkService {
             return base.Channel.TimbraCfdi(comprobante);
         }
         
-        public string CancelaCfdi(string uuid, string rfcEmisor, string expresion, string rfcReceptor) {
-            return base.Channel.CancelaCfdi(uuid, rfcEmisor, expresion, rfcReceptor);
+        public string CancelaCfdi(string uuid, string motivo, string folioSustituto, string rfcEmisor, string expresion, string rfcReceptor) {
+            return base.Channel.CancelaCfdi(uuid, motivo, folioSustituto, rfcEmisor, expresion, rfcReceptor);
         }
         
         public string CancelaRetencion(string uuid, string rfc) {
@@ -83,6 +86,10 @@ namespace ClienteNtLink.NtLinkService {
         
         public string ConsultaEstatusCFDI(string expresion) {
             return base.Channel.ConsultaEstatusCFDI(expresion);
+        }
+        
+        public string TimbraRetencion(string comprobante) {
+            return base.Channel.TimbraRetencion(comprobante);
         }
     }
 }

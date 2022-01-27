@@ -34,6 +34,9 @@ namespace GafLookPaid
                         NombreCompleto = "TODOS LOS EMPLEADOS"
                     });
                     this.ddlClientes.DataSource = empleados;
+                
+
+
                     this.ddlEmpresas.DataSource = cliente.ListaEmpresas(perfil, idEmp.Value, sistema.Value, null);
                     this.ddlEmpresas.Enabled = perfil.Equals("Administrador");
                     this.ddlEmpresas.DataBind();
@@ -45,6 +48,51 @@ namespace GafLookPaid
             }
         }
 
+
+        protected void btnCancelarSAT_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = (int)ViewState["IDCancelar"];
+
+              //  int id = Convert.ToInt32(e.CommandArgument);
+                IServicioLocal cliente = NtLinkClientFactory.Cliente();
+                using (cliente as IDisposable)
+                {
+                    vventas venta = cliente.GetFactura(id);
+                    ComprobantePdf factu = cliente.GetComprobantePdfx(venta.Guid);
+                    int tam_var = factu.timbre_selloCFD.Length;
+                    string Var_Sub = factu.timbre_selloCFD.Substring(tam_var - 8, 8);
+                    string URL = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
+                    string cadena = string.Concat(new object[]
+                    {
+                            URL,
+                            "?&id=",
+                            venta.Guid.ToString().ToUpper(),
+                            "&re=",
+                            venta.RfcEmisor,
+                            "&rr=",
+                            venta.Rfc,
+                            "&tt=",
+                            venta.Total,
+                            "&fe=",
+                            Var_Sub
+                    });
+                    string cancelacion = cliente.CancelarFactura33(venta.RfcEmisor, venta.Guid, cadena, venta.Rfc, ddlMotivo.SelectedValue, txtFolioSustituto.Text);
+                    this.lblError.Text = cancelacion;
+                    this.FillView();
+                }
+            }
+            catch (FaultException fe)
+            {
+                this.lblError.Text = fe.Message;
+            }
+            catch (Exception fe_54A)
+            {
+            }
+
+
+        }
         protected void gvFacturas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -114,43 +162,12 @@ namespace GafLookPaid
             }
             else if (e.CommandName.Equals("Cancelar"))
             {
-                try{
+               // var id = (int)this.gvFacturas.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["idventa"];
 
-					int id = Convert.ToInt32(e.CommandArgument);
-					IServicioLocal cliente = NtLinkClientFactory.Cliente();
-					using (cliente as IDisposable)
-					{
-						vventas venta = cliente.GetFactura(id);
-						ComprobantePdf factu = cliente.GetComprobantePdfx(venta.Guid);
-						int tam_var = factu.timbre_selloCFD.Length;
-						string Var_Sub = factu.timbre_selloCFD.Substring(tam_var - 8, 8);
-						string URL = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
-						string cadena = string.Concat(new object[]
-						{
-							URL,
-							"?&id=",
-							venta.Guid.ToString().ToUpper(),
-							"&re=",
-							venta.RfcEmisor,
-							"&rr=",
-							venta.Rfc,
-							"&tt=",
-							venta.Total,
-							"&fe=",
-							Var_Sub
-						});
-						string cancelacion = cliente.CancelarFactura33(venta.RfcEmisor, venta.Guid, cadena, venta.Rfc);
-						this.lblError.Text = cancelacion;
-						this.FillView();
-					}
-				}
-				catch (FaultException fe)
-				{
-					this.lblError.Text = fe.Message;
-				}
-				catch (Exception fe_54A)
-				{
-				}
+                int id = Convert.ToInt32(e.CommandArgument);
+                ViewState["IDCancelar"] = id;
+                this.mpeCancelar.Show();
+
             }
 
             else if (e.CommandName.Equals("Acuse"))
@@ -390,6 +407,21 @@ namespace GafLookPaid
                     gvFacturas.Rows[i].BackColor = Color.FromName("#e4e5e7");
                 else if (gvFacturas.Rows[i].Cells[8].Text == "Pagado")
                     gvFacturas.Rows[i].BackColor = Color.FromName("#b3d243");
+            }
+        }
+        protected void ddlMotivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlMotivo.SelectedValue != "01")
+            {
+                txtFolioSustituto.Enabled = false;
+                txtFolioSustituto.Text = "";
+                txtFolioSustituto.BackColor = System.Drawing.Color.LightGray;
+            }
+            else
+            {
+                txtFolioSustituto.BackColor = System.Drawing.Color.White;
+
+                txtFolioSustituto.Enabled = true;
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WfrNomina.aspx.cs"
-    MaintainScrollPositionOnPostBack="true" Inherits="GafLookPaid.WfrNomina" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WfrNomina.aspx.cs" Inherits="GafLookPaid.WfrNomina" %>
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <%@ Register Src="~/controles/JubilacionPensionRetiro.ascx" TagPrefix="uc" TagName="UCJubilacionPensionRetiro" %>
 <%@ Register Src="~/controles/SeparacionIndemnizacion.ascx" TagPrefix="uc" TagName="UCSeparacionIndemnizacion" %>
@@ -8,104 +7,227 @@
 <%@ Register Src="~/controles/OtrosPagos.ascx" TagPrefix="uc" TagName="UCOtrosPagos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-  <%--  <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />
-  --%>   
-      <link href="Content/bootstrap.min.css" rel="stylesheet" />
-      <link href="Content/bootstrap.css" rel="stylesheet" />
-      <script src="Scripts/chosen.jquery.js" ></script>
-      <script src="Scripts/bootstrapcdn-v3-4-0-bootstrap.min.js"></script>
-     <link href="Content/Mensajes.css" rel="stylesheet" />
-     <link href="Content/UpdateProgress.css" rel="stylesheet" />
-
-    
-    </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+    <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-       .ajax__calendar_container { z-index : 99999 ; }
-       .ajax__calendar {
-        position: relative;
-        left: 0px !important;
-        top: 0px !important;
-        visibility: visible; display: block;
-        color:aquamarine;
-        background-color:aqua;
+
+
+      .mpeBack
+	{
+		background-color: Gray;
+		filter: alpha(opacity=70);
+		opacity: 0.7;
+	}
+
+    .modalBackground {
+        background-color: #666;
+        filter: alpha(opacity=70);
+        opacity: 0 ;
     }
-    .ajax__calendar iframe
+    .modalPopup
     {
-        left: 0px !important;
-        top: 0px !important;
+      background-color: #AACE48;
+      border-width: 2px;
+      border-style: solid;
+      border-color: #000;
+      padding: 8px;
+      width: 300px;
+      text-align: center;
+      
     }
-    </style>
+	
 
-    <asp:UpdatePanel ID="up1" runat="server"  UpdateMode="Conditional"  >
-    <ContentTemplate>
-         
-    <section class="services">
-        <div class="container">
-            <div class="title text-center">
-            
-               
-            </div>
-          
-              
-     <div  class = "card mt-2">   
-            <div class="card-header">
-               <h3>Generar Recibo de Nómina</h3>
-            </div>
-            <div class ="card-body" >
-   
-                  <asp:UpdatePanel ID="UpdatePanel1" runat="server"  UpdateMode="Conditional"  >
-    <ContentTemplate>
-            <div class = "row form-group"> 
-            <div class="col-lg-12 " style="color:red;" >
-                            <asp:Label ID="lblVencimiento" class="control-label" runat="server" ForeColor="Red" Font-Bold="true" style=" font-size: x-small; text-align: left; font-variant: small-caps;" Width="250px"></asp:Label>
-            </div>
-            </div>
-                 <div class = "row form-group"> 
-                <div class="col-lg-6 " >
-                        <asp:Label  class="control-label" ID="Label8" runat="server" Text="Empresa"></asp:Label>
-                       <asp:DropDownList ID="ddlEmpresa" CssClass="form-control" runat="server" 
-                           AutoPostBack="True" DataTextField="RazonSocial" DataValueField="idEmpresa"
-                           Enabled="False" onselectedindexchanged="ddlEmpresa_SelectedIndexChanged"  />
-                </div>
-                <div class="col-lg-3" >
-                        <asp:Label  class="control-label" ID="Label4" runat="server" Text="Serie" ></asp:Label>
-                        <asp:TextBox ID="txtSerie" runat="server"  CssClass="form-control"/>
-                    </div>
-                <div class="col-lg-3" >
-                  <asp:Label  class="control-label" ID="lblFolio" runat="server" Text="Folio" ></asp:Label>
-                        <asp:TextBox ID="txtFolio" runat="server" CssClass="form-control" />
-                     
-                </div>
-                     </div>
 
-                  <div class ="row form-group"> 
-                <div class="col-lg-3" >
-                      <asp:Label  class="control-label" ID="Label6" runat="server" Text="* Centro de Trabajo"></asp:Label>
-                    <asp:DropDownList ID="DdlCentroTrabajo" runat="server" AutoPostBack="True"
-                        DataTextField="Nombre" DataValueField="IdCentroTrabajo" CssClass="form-control"
-                        onselectedindexchanged="DdlCentroTrabajo_OnSelectedIndexChanged" />
-               </div>
-                       <div class="col-lg-3" >
-                      <asp:Label  class="control-label" ID="Label7" runat="server" Text="Registro Patronal"></asp:Label>
-                      <asp:TextBox ID="txtRegistroPatronal" runat="server" CssClass="form-control"
-                          Enabled="False" EnableTheming="True" ></asp:TextBox>
-                </div>
-                           <div class="col-lg-3" >
-                      <asp:Label  class="control-label" ID="Label9" runat="server" Text="* Tipo de Jornada"></asp:Label>
-                     <asp:TextBox ID="txtTipoJornada" runat="server" CssClass="form-control"
-                         Enabled="False" ToolTip="Diurna, nocturna, mixta, por hora, reducida, continua, partida, por turnos, etc."
-                         ></asp:TextBox>
-                </div>
-                </div>
+        #Background
+{
+position:fixed;
+top:0px;
+bottom:0px;
+left:0px;
+right:0px;
+overflow:hidden;
+paddin:0;
+margin:0;
+background-color:transparent;
+filter:alpha(opacity=80);
+opacity:0.8;
+z-index:10000;
 
-              
-                    <asp:Label ID="lblLugarExpedicion" runat="server" Visible="False" style="color: #FF3300" /></td>
-                <div class = "row form-group"> 
-                <div class="col-lg-3" >
-                <asp:Label  class="control-label" ID="Label10" runat="server" Text="Periodicidad"></asp:Label>
-                 <asp:DropDownList ID="ddlPeriodicidad" runat="server" AutoPostBack="True" CssClass="form-control" onselectedindexchanged="ddlPeriodicidad_SelectedIndexChanged">
+}
+        #Progress {
+            position:fixed;
+            top:40%;
+            left:40%;
+            height:20%;
+            width:20%;
+            z-index: 100001;
+            background-color:transparent;
+            border:0px;
+            background-image:url("images/ajax-loader.gif");
+            background-repeat:no-repeat;
+            background-position:center;   
+            text-align:center;         
+        }
+
+	.mpeBack
+	{
+		background-color: Gray;
+		filter: alpha(opacity=70);
+		opacity: 0.7;
+	}		
+		.auto-style149 {
+            text-align: left;
+            width: 127px;
+            color: #000000;
+        }
+        .auto-style153 {
+            height: 24px;
+            width: 107px;
+        }
+		.auto-style155 {
+            width: 126px;
+            height: 41px;
+            text-align: right;
+        }
+		.auto-style161 {
+            width: 51%;
+        }
+		.auto-style162 {
+            color: #666666;
+        }
+		.auto-style164 {
+            width: 107px;
+        }
+        .auto-style165 {
+            width: 145px;
+        }
+        .auto-style166 {
+            width: 114px;
+        }
+        .auto-style167 {
+            width: 165px;
+        }
+		.auto-style158 {
+            text-align: right;
+            height: 54px;
+        }
+        .auto-style169 {
+            width: 164px;
+        }
+		.auto-style170 {
+            width: 74px;
+        }
+        .auto-style172 {
+            width: 127px;
+        }
+		.auto-style177 {
+            text-align: right;
+        }
+		.auto-style179 {
+            width: 201px;
+        }
+        .auto-style181 {
+            display: block;
+            padding: 6px 16px;
+            font-size: 12px;
+            line-height: 1.42857143;
+            color: #000;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #A7CF39;
+            border-radius: 10px 10px 10px 10px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            margin-left: 0px;
+        }
+        .auto-style183 {
+            width: 196px;
+        }
+		.auto-style159 {            text-align: left;
+        }
+		.auto-style184 {
+            width: 126px;
+        }
+		.auto-style185 {
+            width: 42px;
+        }
+        .auto-style186 {
+            text-align: right;
+            width: 42px;
+        }
+		.auto-style187 {
+            text-align: left;
+            width: 204px;
+        }
+        .auto-style188 {
+            width: 204px;
+        }
+        .auto-style189 {
+            width: 155px;
+        }
+		.auto-style190 {
+            width: 98px;
+        }
+		</style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Generar Recibo de Nómina</h1>
+	
+       <asp:UpdatePanel ID="up1" runat="server" CssClass="page7" BorderStyle="Double" UpdateMode="Conditional">
+        <ContentTemplate>
+    <table>
+               <tr><td style="text-align: left"><asp:Label ID="lblVencimiento" runat="server" style="text-align:center; color: #800000;" ></asp:Label></td></tr>
+           
+        </table> 
+            <table class="table-hover">
+            <tr>
+                <td class="auto-style155">* Empresa:</td>
+                <td class="auto-style159">
+                    <asp:DropDownList ID="ddlEmpresa" runat="server"  CssClass="form-control2"
+                        AutoPostBack="True" DataTextField="RazonSocial" DataValueField="idEmpresa"
+                        Enabled="False"  onselectedindexchanged="ddlEmpresa_SelectedIndexChanged" 
+                        Width="240px" />
+                </td>
+                <td class="auto-style185">Serie:</td>
+                <td class="auto-style160" style="text-align: left">
+                    <asp:TextBox ID="txtSerie" runat="server" CssClass="form-control2" Height="15px" Width="144px" />
+                </td>
+                <td class="auto-style158">Folio:</td>
+                <td class="auto-style34">
+                    <asp:TextBox ID="txtFolio" runat="server" CssClass="form-control2" Enabled="False" Width="72px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style155">* Centro de Trabajo:</td>
+                <td style="text-align: left">
+                    <asp:DropDownList ID="DdlCentroTrabajo" runat="server" CssClass="form-control2"
+                        AutoPostBack="True" DataTextField="Nombre" DataValueField="IdCentroTrabajo"  
+                        onselectedindexchanged="DdlCentroTrabajo_OnSelectedIndexChanged" Width="146px" />
+                
+                </td>
+                <td class="auto-style186" style="text-align: right">
+                    <asp:Label ID="Label10" runat="server" Text="Registro Patronal:"></asp:Label>
+                </td>
+                <td class="auto-style160">
+                    <asp:TextBox ID="txtRegistroPatronal" runat="server" CssClass="form-control2" Enabled="False" EnableTheming="True" Width="145px"></asp:TextBox>
+                </td>
+                <td class="auto-style158">* Tipo de Jornada:</td>
+                <td class="auto-style35">
+                    <asp:TextBox ID="txtTipoJornada" runat="server" CssClass="form-control2" Enabled="False" ToolTip="Diurna, nocturna, mixta, por hora, reducida, continua, partida, por turnos, etc." Width="72px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: left">    <asp:Label ID="lblLugarExpedicion" runat="server" Visible="False" style="color: #FF3300" /></td>
+
+            </tr>
+                
+                <tr>
+                <td class="auto-style155">Periodicidad</td>
+                <td class="auto-style159">
+                    <asp:DropDownList ID="ddlPeriodicidad" runat="server" AutoPostBack="True" 
+                        CssClass="form-control2" onselectedindexchanged="ddlPeriodicidad_SelectedIndexChanged">
                         <asp:ListItem Text="Diario" Value="01" />
                         <asp:ListItem Text="Semanal" Value="02" />
                         <asp:ListItem Text="Catorcenal" Value="03" />
@@ -115,127 +237,184 @@
                         <asp:ListItem Text="Unidad obra" Value="07" />
                         <asp:ListItem Text="Comisión" Value="08" />
                         <asp:ListItem Text="Precio alzado" Value="09" />
-                        <asp:ListItem Text="Decenal" Value="10" />
+                        <asp:ListItem Text="Precio alzado" Value="10" />
                         <asp:ListItem Text="Otra Periodicidad" Value="99" />
                     </asp:DropDownList>
-                    </div>
-                    <div class="col-lg-3" >
-                    <asp:Label  class="control-label" ID="Label11" runat="server" Text="* Tipo de Nómina"></asp:Label>
-                      <asp:DropDownList ID="ddlTipoNomina" runat="server" AutoPostBack="True" CssClass="form-control"
-                          onselectedindexchanged="ddlTipoNomina_SelectedIndexChanged" style="text-align: center;">
+                    <td>* Tipo de Nómina:</td>
+                    <td>
+                        <asp:DropDownList ID="ddlTipoNomina" runat="server" AutoPostBack="True" CssClass="form-control2" onselectedindexchanged="ddlTipoNomina_SelectedIndexChanged" style="text-align: center; margin-left: 0px">
                             <asp:ListItem Text="Nómina ordinaria" Value="O"></asp:ListItem>
                             <asp:ListItem Text="Nómina extraordinaria" Value="E"></asp:ListItem>
                         </asp:DropDownList>
-                     </div>
-                     <div class="col-lg-3" >
-                      <asp:Label  class="control-label" ID="Label13" runat="server" Text="Riesgo del puesto"></asp:Label>
-                       <asp:DropDownList ID="ddlRiesgoPuesto" runat="server" Enabled="False"  CssClass="form-control" >
+                    </td>
+                    <td class="auto-style158">
+                        <asp:Label ID="Label24" runat="server" style="text-align: right" Text="Riesgo del puesto:"></asp:Label>
+                    </td>
+                    <td style="text-align: left">
+                        <asp:DropDownList ID="ddlRiesgoPuesto" runat="server" CssClass="form-control2"
+                            Enabled="False" >
+                            <asp:ListItem Text="Seleccionar" Value="0" />
                             <asp:ListItem Text="Clase I" Value="1" />
                             <asp:ListItem Text="Clase II" Value="2" />
                             <asp:ListItem Text="Clase III" Value="3" />
                             <asp:ListItem Text="Clase IV" Value="4" />
                             <asp:ListItem Text="Clase V" Value="5" />
                         </asp:DropDownList>
-                         </div>
-                    </div>
+                    </td>
+                </td>
+            </tr>
+           
+        </caption>
 
-        </ContentTemplate>
-                      </asp:UpdatePanel>
-
-                   
-              <div class = "card mt-2">   
-            <div class = "card-header">
-                <b>    Datos Empleado </b>
-            </div>
-            <div class = "card-body" id="Div1" runat="server" >
-                  <asp:UpdatePanel ID="UpdatePanel2" runat="server"  UpdateMode="Conditional"  >
-    <ContentTemplate>
-
-                 <div class = "row">
-                    <div class = "form-group col-lg-6">
-                   <asp:Label ID="lblUUID" runat="server" class="control-label" Text="* Empleado"></asp:Label>
-                    <asp:DropDownList runat="server" ID="ddlClientes" AutoPostBack="True"
-		 DataTextField="NombreCompleto" DataValueField="idCliente" 
-            onselectedindexchanged="ddlClientes_SelectedIndexChanged" CssClass="form-control"/>
-                        </div>
-                    <div class = "form-group col-lg-6">
-                     
-             <asp:TextBox runat="server"  ID="txtRazonSocial"   Text-align="center" TextMode="MultiLine"
-                 CssClass="form-control" Enabled="False" />
-                        </div>
-                     </div>
-                  <div class = "row">
-                	   	    <div class = "form-group col-lg-6">
-                   <asp:Label ID="Label14" runat="server" class="control-label" Text="Observaciones"></asp:Label>
-                 <asp:TextBox ID="txtProyecto" runat="server" CssClass="form-control" TextMode="MultiLine" />
-          </div>
-          </div>
-
-        </ContentTemplate>
-                      </asp:UpdatePanel>
-                </div>
-                  </div>
-                 <!-- <table>
+    </table>
+  <!-- <table>
        <tr>
-           <td class="auto-style29"><asp:Label ID="Label28" runat="server" Text="Nombre:"></asp:Label></td>
+           <td class="auto-style29"><asp:Label ID="Label8" runat="server" Text="Nombre:"></asp:Label></td>
             <td ><asp:TextBox runat="server" ID="txtNombreCentro" Enabled="False"></asp:TextBox></td>
           
           
        </tr>
    </table>-->
-                  <div class = "card mt-2">   
-            <div class = "card-header">
-                  <b>  Exclusivo Dependencias Federales </b>
-            </div>
-            <div class = "card-body" id="Div2" runat="server" >
-                 <div class = "row">
-                    <div class = "form-group col-lg-6">
-                   <asp:Label ID="Label15" runat="server" class="control-label" Text="OrigenRecurso"></asp:Label>
-                    <asp:DropDownList ID="ddlOrigenRecurso" runat="server" AutoPostBack="True"
-                        ClientIDMode="Static" CssClass="form-control" onselectedindexchanged="ddlOrigenRecurso_SelectedIndexChanged"
-                        >
+       	<br />	
+    <table class="table-bordered"> <tr>
+		<td class="auto-style183">*Empleado:</td>
+           <td><asp:DropDownList runat="server" ID="ddlClientes" AutoPostBack="True"
+		 DataTextField="NombreCompleto" DataValueField="idCliente" 
+            onselectedindexchanged="ddlClientes_SelectedIndexChanged" style="margin-left: 0px" CssClass="form-control2"/>
+	</td>
+           <td><asp:TextBox runat="server"  ID="txtRazonSocial"   Text-align="center" TextMode="MultiLine" Width ="399px" Height="16px" CssClass="form-control0" Enabled="False" />
+	   	</td>		
+         </tr>
+        <tr><td class="auto-style183"></td></tr>
+        <tr><td class="auto-style183" >Observaciones </td>
+            <td class="auto-style184">
+                <asp:TextBox ID="txtProyecto" runat="server" CssClass="auto-style181" Height="30px" TextMode="MultiLine" Width="355px" />
+            </td>
+        </tr>
+         
+   </table>
+          
+        <table class="page7">
+            <tr>
+                <td style="text-align: left; color: #0000FF; font-size: medium;" class="auto-style190">Exclusivo </td>
+                <td style="color: #0000FF; font-size: medium;" class="auto-style187">Dependencias Federales</td>
+            </tr>
+            <tr>
+                <td class="auto-style190" style="text-align: left">OrigenRecurso</td>
+                <td class="auto-style188">
+                    <asp:DropDownList ID="ddlOrigenRecurso" runat="server" AutoPostBack="True" ClientIDMode="Static" CssClass="form-control2" onselectedindexchanged="ddlOrigenRecurso_SelectedIndexChanged" style="margin-left: 0px">
                         <asp:ListItem Text="Selecciona" Value="0" />
                         <asp:ListItem Text="Ingresos propios" Value="IP" />
                         <asp:ListItem Text="Ingreso federales" Value="IF" />
                         <asp:ListItem Text="Ingresos mixtos" Value="IM" />
                     </asp:DropDownList>
-                </div>
-                   <div class = "form-group col-lg-6">
-                    <asp:Label ID="lblMontoRecursoPropio" class="control-label" runat="server" 
-                     Text="MontoRecursoPropio" Visible="false"></asp:Label>
-                    <asp:TextBox ID="txtMontoRecursoPropio" runat="server" CssClass="form-control"
-                        Enabled="false" Visible="false"></asp:TextBox>
-                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender13" runat="server" 
-                        FilterType="Numbers, Custom" TargetControlID="txtMontoRecursoPropio" ValidChars="." />
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" 
-                        ControlToValidate="txtMontoRecursoPropio" Display="Dynamic" ErrorMessage="Dato invalido" 
-                        ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura" />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" 
-                        ControlToValidate="txtMontoRecursoPropio" Display="Dynamic" ErrorMessage="Requerido"
-                        ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
-                </div>
-                     </div>
-                </div>
-                      </div>
+                </td>
+                <td class="auto-style189">
+                    <asp:Label ID="lblMontoRecursoPropio" runat="server" Text="MontoRecursoPropio" Visible="false"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMontoRecursoPropio" runat="server" CssClass="form-control2" Enabled="false" Visible="false"></asp:TextBox>
+                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender13" runat="server" FilterType="Numbers, Custom" TargetControlID="txtMontoRecursoPropio" ValidChars="." />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ControlToValidate="txtMontoRecursoPropio" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura" />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ControlToValidate="txtMontoRecursoPropio" Display="Dynamic" ErrorMessage="Requerido" ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>  
 
-               <asp:UpdatePanel ID="Panel45" runat="server"  UpdateMode="Conditional">
-               <ContentTemplate>
-      <asp:Panel runat="server" CssClass="table-responsive">
-          
-        <div class = "card mt-2">   
-            <div class = "card-header">
-                <asp:CheckBox ID="cbCfdiRelacionados" runat="server" AutoPostBack="true"
-                Text="CFDIs Relacionados" OnCheckedChanged="cbCfdiRelacionados_CheckedChanged" />
-            </div>
-            <div class = "card-body" id="DivCfdiRelacionados" runat="server" >
-                <div class = "row">
-                    <div class = "form-group col-lg-6">
-                        <asp:Label ID="Label16" runat="server" class="control-label" Text="UUID"></asp:Label>
-                        <asp:TextBox ID="txtUUDI" runat="server" Width="100%" CssClass="form-control"/>
-                 </div>
-                        <div class = "form-group col-lg-6">
-                        <asp:Label ID="lblTipoRelacion" runat="server" class="control-label" Text="Tipo de Relación"></asp:Label>
-             <asp:DropDownList runat="server" ID="ddlTipoRelacion" AutoPostBack="True" CssClass="form-control" >
+                            <h1>
+                                <asp:Label ID="Label58" runat="server"  style="font-weight: 700; color: #990000;" Text="Datos de Nómina"></asp:Label>
+                            </h1>
+                        <table class="page2" style="height:100px" >
+                            <tr><td>
+                                          &nbsp;</td></tr>
+                                  <tr>
+                                      
+                                <td class="auto-style153" style="text-align:left">
+                                    <asp:Label ID="Label12" runat="server" text="* Fecha de Pago: "></asp:Label>
+                                </td>
+                                <td class="auto-style165">
+                                    <asp:TextBox ID="txtFechaPagoNomina" runat="server" CssClass="form-control0" Width="100px"></asp:TextBox>
+                                    <asp:CalendarExtender ID="CalendarExtender3" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaPagoNomina" />
+                                </td>
+                                <td>
+                                    <asp:Label ID="Label3" runat="server" Text="* Días Pagados:"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtDiasPagados" runat="server" CssClass="form-control0" Width="100px"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtFechaPago" runat="server" CssClass="form-control0" Height="16px" Visible="False" Width="16px"></asp:TextBox>
+                                    <asp:CalendarExtender ID="txtFechaPago_CalendarExtender" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaPago" />
+                                </td>
+                                <td class="auto-style167">
+                                    <asp:Label ID="Label1" runat="server" Text="* Fecha de Inicio del Pago:"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control0" Width="113px"></asp:TextBox>
+                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaInicio" />
+                                </td>
+                                <td>
+                                    <asp:Label ID="Label2" runat="server" text="* Fecha Final del Pago:"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-control0" Width="113px"></asp:TextBox>
+                                    <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaFin" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style164"></td>
+                                <td class="auto-style165">
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txtFechaPagoNomina" ErrorMessage="Dato inválido" ForeColor="#FF3300" ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtFechaPagoNomina" ErrorMessage="Campo obligatorio" ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
+                                </td>
+                                <td>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtFechaInicio" ErrorMessage="Dato inválido" ForeColor="#FF3300" ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
+                                </td>
+                                <td>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFechaInicio" ErrorMessage="Campo obligatorio" ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
+                                </td>
+                                <td class="auto-style170">&nbsp;</td>
+                                <td class="auto-style167">
+                                    <asp:RequiredFieldValidator ID="rfvDias" runat="server" ControlToValidate="txtDiasPagados" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" style="text-align: right" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtFechaFin" ErrorMessage="Dato inválido" ForeColor="#FF3300" ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
+                                </td>
+                                <td>&nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaFin" ErrorMessage="Campo obligatorio" ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
+                                </td>
+                                </td>
+                            </tr>
+
+                            </table>
+            <br />
+            <table class="table-bordered">
+                            <tr>
+                                <td>
+
+<asp:Panel ID="Panel3" runat="server"  CssClass="page7" BorderStyle="Double" HorizontalAlign="Left" Width="100%" Visible="true"> 
+         		<asp:CheckBox runat="server" ID="cbCfdiRelacionados" Text="CfdiRelacionados" CssClass="page7"
+                    AutoPostBack="True" 
+                    style="font-weight: 700; color: #800000;" OnCheckedChanged="cbCfdiRelacionados_CheckedChanged"/>
+		
+       
+                  
+       
+                  &nbsp;<div id="DivCfdiRelacionados"  style="width:100%" runat="server" visible="false">
+         <table width="100%">
+         
+<tr>
+<td colspan="3"  style="text-align: right; font-weight: 700;" >
+
+    &nbsp;</td>
+</tr>
+<tr>
+         <td class="text-right">UUID:</td>
+         <td>
+             <asp:TextBox ID="txtUUDI" runat="server" Width="271px" CssClass="form-control2" />
+         </td>
+         <td class="text-right">TipoRelacion:</td>
+         <td>       <asp:DropDownList runat="server" ID="ddlTipoRelacion" AutoPostBack="True" CssClass="form-control2" >
  <%--<asp:ListItem runat="server" Value="01" Text="01 - Nota de crédito de los documentos relacionados" />
  <asp:ListItem runat="server" Value="02" Text="02 - Nota de débito de los documentos relacionados" />
  <asp:ListItem runat="server" Value="03" Text="03 - Devolución de mercancía sobre facturas o traslados previos" />--%>
@@ -246,168 +425,110 @@
              <%--<asp:ListItem runat="server" Value="08" Text="08 - Factura generada por pagos en parcialidades" />
                  <asp:ListItem runat="server" Value="09" Text="09 - Factura generada por pagos diferidos" />--%>
                         </asp:DropDownList>
-      </div>
                     
-      <div class = "row">
-                    <div class = "col-lg-12 float-right" style="float:right">
+      </td>
+         </tr>
+<tr>
+<td colspan="4" style="text-align: center">
 <asp:Button runat="server" ID="btnCfdiRelacionado" Text="Agregar CfdiRelacionado" 
-        ValidationGroup="AgregarCfdiRelacionado"  CssClass="btn btn-outline-success"
+        ValidationGroup="AgregarCfdiRelacionado"  class="btn btn-primary" 
         onclick="btnCfdiRelacionado_Click" Width="190px"/>
-</div>
-          </div>
-                    <br />
-                    <br />
-<div style="text-align:center; width:100%">
-                    <div class="border border-success" style=" width:80%; margin:0px auto  " >
-                        <asp:GridView ID="gvCfdiRelacionado" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True"  Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="gvCfdiRelacionado_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            OnRowDataBound="gvCfdiRelacionado_RowDataBound">
-                            <rowstyle Height="6px" />
-                            <alternatingrowstyle  Height="6px"/>
-                            <Columns>
-
+</td>
+</tr>
+<tr>
+<td colspan="5">
+<asp:GridView runat="server" ID="gvCfdiRelacionado" AutoGenerateColumns="False" CssClass="style124"
+			Width="100%" ShowHeaderWhenEmpty="True" OnRowCommand="gvCfdiRelacionado_RowCommand" >
+			<Columns>
               	<asp:BoundField HeaderText="ID" DataField="ID"  ItemStyle-HorizontalAlign="Center" />
                 <asp:BoundField HeaderText="UUID" DataField="UUID" ItemStyle-HorizontalAlign="Center"/>
 			    		
 				<asp:ButtonField Text="Eliminar" CommandName="EliminarCfdiRelacionado" Visible="False" ItemStyle-HorizontalAlign="Center" />
 			</Columns>
 		</asp:GridView>
-</div>
+</td>
+</tr>
+</table>
     
+        
       </div>
-      </div>
+      </asp:Panel>
+                                    
+                                </td>
+                                <td>
+                                    &nbsp;</td>
+                            </tr>
+                            <%-- <tr>
+            <td style="text-align: right;"  >
+		        Condiciones de Pago:</td><td  style="text-align: left" class="auto-style4">
+		        <asp:DropDownList runat="server" ID="ddlCondicionesPago" AutoPostBack="True" 
+                    onselectedindexchanged="ddlCondicionesPago_SelectedIndexChanged">
+		            <asp:ListItem runat="server" Text="En una sola exhibición" Value="En una sola exhibición"></asp:ListItem>
+                   
+		        </asp:DropDownList>
+	        </td>
+        </tr>--%>
+               
+            </table>
 
-                </div>
-            </div>
-          </asp:Panel>
-                   </ContentTemplate>
-                   </asp:UpdatePanel>
+           
 
-                      <div class = "card mt-2">   
-            <div class = "card-header">
-                  <b>  Datos de Nómina</b>
-            </div>
-            <div class = "card-body" id="Div3" runat="server" >
 
-                  <asp:UpdatePanel ID="UpdatePanel3" runat="server"  UpdateMode="Conditional"  >
-    <ContentTemplate>
 
-                 <div class = "row">
-                     <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label12"  class="control-label" runat="server" text="* Fecha de Pago: "></asp:Label>
-                                   <asp:TextBox ID="txtFechaPagoNomina" runat="server" CssClass="form-control" ></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender3" runat="server" Format="yyyy-MM-dd"
-                                        TargetControlID="txtFechaPagoNomina" />
-                           <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" 
-                                        ControlToValidate="txtFechaPagoNomina" ErrorMessage="Dato inválido" 
-                                        ForeColor="#FF3300" ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
-                                        ControlToValidate="txtFechaPagoNomina" ErrorMessage="Campo obligatorio" 
-                                        ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
-                         </div>
-                     <div class = "form-group col-lg-3">
-                         <asp:Label ID="Label3" runat="server"  class="control-label" Text="* Días Pagados:"></asp:Label>
-                         <asp:TextBox ID="txtDiasPagados" runat="server" CssClass="form-control" ></asp:TextBox>
-                                 <asp:RequiredFieldValidator ID="rfvDias" runat="server"
-                                        ControlToValidate="txtDiasPagados" ErrorMessage="Campo Obligatorio" 
-                                        ForeColor="#FF3300" style="text-align: right" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
-                            
-                            </div>
-                        
-                        <asp:TextBox ID="txtFechaPago" runat="server" CssClass="form-control" Height="16px" Visible="False" ></asp:TextBox>
-                                    <asp:CalendarExtender ID="txtFechaPago_CalendarExtender" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaPago" />
-                     <div class = "form-group col-lg-3">
-                              <asp:Label ID="Label1" runat="server" class="control-label" Text="* Fecha de Inicio del Pago:"></asp:Label>
-                                    <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaInicio" />
-                               <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
-                                        ControlToValidate="txtFechaInicio" ErrorMessage="Dato inválido" 
-                                        ForeColor="#FF3300" ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                        ControlToValidate="txtFechaInicio" ErrorMessage="Campo obligatorio" 
-                                        ForeColor="#FF3300" ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
-                         </div>
-                     <div class = "form-group col-lg-3">
-                                       <asp:Label ID="Label2" runat="server" class="control-label" text="* Fecha Final del Pago:"></asp:Label>
-                                    <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-control" ></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="yyyy-MM-dd" TargetControlID="txtFechaFin" />
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server"
-                                        ControlToValidate="txtFechaFin" ErrorMessage="Dato inválido" ForeColor="#FF3300" 
-                                        ValidationExpression="(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                                    ControlToValidate="txtFechaFin" ErrorMessage="Campo obligatorio" ForeColor="#FF3300"
-                                    ValidationGroup="CrearFactura"></asp:RequiredFieldValidator>
-                         </div>
-                    </div>
 
+
+
+          
+           
+            <%--<asp:UpdatePanel ID="up1" runat="server" UpdateMode="Conditional">
+		<ContentTemplate>--%>
+
+<br />
             <div>
-                <asp:TabContainer ID="TabContainer1" runat="server"  ActiveTabIndex="1" Width="100%">
-                    <asp:TabPanel ID="PanelPercepciones" runat="server" CssClass="page7"   HeaderText="Percepciones">
+                <asp:TabContainer ID="TabContainer1" runat="server"  ActiveTabIndex="3" style="color: #000; text-decoration: blink; font-weight: 700; font-family: Arial, Helvetica, sans-serif; text-align: left;" Width="100%">
+                    <asp:TabPanel ID="PanelPercepciones" runat="server" CssClass="page7" BorderStyle="Double"  HeaderText="Percepciones">
                         <ContentTemplate>
-                          <div class = "row form-group">
-                          <div class = "col-lg-3">
-                 
-                            <asp:CheckBox ID="ChPercepciones" runat="server" AutoPostBack="True" 
-                                OnCheckedChanged="ChPercepciones_CheckedChanged" Text="Percepciones" />
-                             </div>
-                              <div class = "col-lg-3">
-                              <asp:CheckBox ID="ChJubilacionPensionRetiro" runat="server" AutoPostBack="True"  
-                                  Enabled="False" OnCheckedChanged="ChJubilacionPensionRetiro_CheckedChanged" Text="JubilacionPensionRetiro" />
-                                 </div>
-                              <div class = "col-lg-3">
-                             <asp:CheckBox ID="ChSeparacionIndemnizacio" runat="server" AutoPostBack="True"
-                                 OnCheckedChanged="ChSeparacionIndemnizacio_CheckedChanged" Text="SeparacionIndemnizacio"  />
-                             </div>
-                              </div>
-
-                              <br />
+                            <table class="page7">
+                                <tr>
+                                    <td class="auto-style120" style="font-weight: 700; font-family: Arial, Helvetica, sans-serif">
+                                        <asp:CheckBox ID="ChPercepciones" runat="server" AutoPostBack="True" CssClass="page2" OnCheckedChanged="ChPercepciones_CheckedChanged" Text="Percepciones" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="ChJubilacionPensionRetiro" runat="server" AutoPostBack="True" CssClass="page2" Enabled="False" OnCheckedChanged="ChJubilacionPensionRetiro_CheckedChanged" style="font-weight: 700; font-family: Arial, Helvetica, sans-serif" Text="JubilacionPensionRetiro" />
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="ChSeparacionIndemnizacio" runat="server" AutoPostBack="True" CssClass="page2" OnCheckedChanged="ChSeparacionIndemnizacio_CheckedChanged" style="font-weight: 700; font-family: Arial, Helvetica, sans-serif" Text="SeparacionIndemnizacio" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
                             <uc:UCJubilacionPensionRetiro ID="JubilacionPensionRetiro" runat="server" />
                             <uc:UCSeparacionIndemnizacion ID="SeparacionIndemnizacion" runat="server" />
                             <uc:UCPercepcionesTotales ID="PercepcionesTotales" runat="server" />
-                               <div class = "card-body" id="Div4" runat="server" >
-                               <div class = "row  form-group">
-                                <div class = "col-lg-3">
-                                 <asp:Label ID="Label17" runat="server" class="control-label" Text="* Clave"></asp:Label>
-                                   <asp:TextBox ID="txtClave" runat="server" CssClass="form-control" MaxLength="15"></asp:TextBox>
+                            <asp:Panel ID="Panel2" runat="server" BorderStyle="Outset" CssClass="page2" HorizontalAlign="Center" Width="100%">
+                                
+                                <table class="table-bordered">
+                                    <tr id="Tr1" runat="server">
+                                        <td runat="server" class="auto-style169" style="color: #000000; text-align: right;">* Clave</td>
+                                        <td runat="server" style="text-align: left" class="auto-style179">
+                                            <asp:TextBox ID="txtClave" runat="server" CssClass="form-control0" MaxLength="15"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtClave" ErrorMessage="Campo Obligatorio" ForeColor="Red" ValidationGroup="AgregarPersepcion"></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server" ControlToValidate="txtClave" ErrorMessage="Dato inválido" ForeColor="#FF3300" ValidationExpression="([A-Z]|[a-z]|[0-9]|Ñ|ñ|!|&quot;|%|&amp;|'|´|-|:|;|&gt;|=|&lt;|@|_|,|\{|\}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü){3,15}" ValidationGroup="AgregarPersepcion"></asp:RegularExpressionValidator>
-                                     </div>
-                                <div class = "col-lg-3">
-                                 <asp:Label ID="Label18" runat="server" class="control-label" Text="* Importe Gravado"></asp:Label>
-                                  <asp:TextBox ID="txtImporteGravado" runat="server" CssClass="form-control" 
-                                      Display="Dynamic" ValidationGroup="AgregarPersepcion"></asp:TextBox>
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtImporteGravado" 
-             ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarPersepcion"></asp:RequiredFieldValidator>
-                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" 
-                                                BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers"
-                                                TargetControlID="txtImporteGravado" ValidChars="." />
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
-                                                ControlToValidate="txtImporteGravado" Display="Dynamic" ErrorMessage="Dato invalido"
-                                                ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" 
-                                                ValidationGroup="AgregarPersepcion" />
-                                    </div>
-                                <div class = "col-lg-3">
-                                 <asp:Label ID="Label19" runat="server" class="control-label" Text="* Importe Excento"></asp:Label>
-                                    <asp:TextBox ID="txtImporteExcento" runat="server" CssClass="form-control"
-                                        Display="Dynamic" ValidationGroup="AgregarPersepcion"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
-                                                ControlToValidate="txtImporteExcento" ErrorMessage="Campo Obligatorio" 
-                                                ForeColor="#FF3300" ValidationGroup="AgregarPersepcion"></asp:RequiredFieldValidator>
-                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server"
-                                                BehaviorID="_content_FilteredTextBoxExtender4" FilterType="Custom, Numbers" 
-                                                TargetControlID="txtImporteExcento" ValidChars="." />
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
-                                                ControlToValidate="txtImporteExcento" Display="Dynamic" ErrorMessage="Dato invalido"
-                                                ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" 
-                                                ValidationGroup="AgregarPersepcion" />
-                                          </div>
-                                   </div>
-                                   <div class = "row">
-                                <div class = "form-group col-lg-9">
-                                 <asp:Label ID="Label20" runat="server" class="control-label" Text="* Tipo Percepción"></asp:Label>
-                                            <asp:DropDownList ID="ddlPercepcion" runat="server" AutoPostBack="True"
-                                                CssClass="form-control" OnSelectedIndexChanged="ddlPercepcion_SelectedIndexChanged" >
+                                        </td>
+                                        <td runat="server" style="text-align: left" class="auto-style172"></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td class="auto-style169"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auto-style169" style="color: #000000; text-align: right;">* Importe Gravado</td>
+                                        <td class="auto-style179">
+                                            <asp:TextBox ID="txtImporteGravado" runat="server" CssClass="form-control0" Display="Dynamic" ValidationGroup="AgregarPersepcion"></asp:TextBox>
+                                        </td>
+                                       <td runat="server" class="auto-style149">* Tipo Percepción</td>
+                                        <td runat="server" class="auto-style161" style="text-align: left">
+                                            <asp:DropDownList ID="ddlPercepcion" runat="server" AutoPostBack="True" CssClass="form-control2" OnSelectedIndexChanged="ddlPercepcion_SelectedIndexChanged" style="margin-left: 0px" Width="651px">
                                                 <asp:ListItem Text="Sueldos, Salarios  Rayas y Jornales" Value="001" />
                                                 <asp:ListItem Text="Gratificación Anual -Aguinaldo-" Value="002" />
                                                 <asp:ListItem Text="Participación de los Trabajadores en las Utilidades PTU" Value="003" />
@@ -453,37 +574,59 @@
                                                 <asp:ListItem Text="Pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de resoluciones judicial o de un laudo" Value="052" />
                                                 <asp:ListItem Text="Pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de resoluciones judicial o de un laudo" Value="053" />
                                             </asp:DropDownList>
-                                   </div>
-                                       </div>
-                            <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                            <asp:CheckBox ID="ChAccionesOTitulos" runat="server" 
-                                                AutoPostBack="True" Enabled="False" 
-                                                OnCheckedChanged="ChAccionesOTitulos_CheckedChanged" 
-                                                style="font-family: Arial, Helvetica, sans-serif;" 
-                                                Text="AccionesOTitulos" />
-                                   </div>
-                                </div>
-                                     <div class = "row">
-                                <div class = "col-lg-6">
-                                           <asp:Button ID="btnAgregarPercepcion" runat="server" CssClass="btn btn-outline-success"
-                                               onclick="btnAgregarPercepcion_Click" Text="Agregar Percepcion" 
-                                               ValidationGroup="AgregarPersepcion" />
-                                  </div>
-                                         </div>
-
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auto-style169"></td>
+                                        <td style="text-align: left" class="auto-style179">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtImporteGravado" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarPersepcion"></asp:RequiredFieldValidator>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers" TargetControlID="txtImporteGravado" ValidChars="." />
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtImporteGravado" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarPersepcion" />
+                                        </td>
+                                        <td class="auto-style172"></td>
+                                       
+                                    </tr>
+                                    
+                                   
+                                     <tr id="tr2" runat="server">
+                                          <td runat="server" class="auto-style169" style="color: #000000; text-align: right;">* Importe Excento</td>
+                                        <td runat="server" class="auto-style179">
+                                            <asp:TextBox ID="txtImporteExcento" runat="server" CssClass="form-control0" Display="Dynamic" ValidationGroup="AgregarPersepcion"></asp:TextBox>
+                                        </td>
+                                        
+                                    </tr>
+                                   <tr>
+                                       <td class="auto-style169"></td>
+                                       
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtImporteExcento" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarPersepcion"></asp:RequiredFieldValidator>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" BehaviorID="_content_FilteredTextBoxExtender4" FilterType="Custom, Numbers" TargetControlID="txtImporteExcento" ValidChars="." />
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtImporteExcento" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarPersepcion" />
+                                        </td></td>
+                                   </tr>
+                                      <tr>
+                                        <td class="auto-style169"></td>
+                                        <td style="text-align: left" class="auto-style179">
+                                            <asp:CheckBox ID="ChAccionesOTitulos" runat="server" AutoPostBack="True" Enabled="False" OnCheckedChanged="ChAccionesOTitulos_CheckedChanged" style="font-weight: 700; font-family: Arial, Helvetica, sans-serif; color: #0000FF;" Text="AccionesOTitulos" />
+                                        </td>
+                                    </tr>
+                                     
+                                     <tr>
+                                       
+                                         <td runat="server" class="auto-style169" style="text-align: left">
+                                            <asp:Button ID="btnAgregarPercepcion" runat="server" class="btn btn-primary" onclick="btnAgregarPercepcion_Click" Text="Agregar Percepcion" ValidationGroup="AgregarPersepcion" Width="158px" />
+                                        </td>
+                                    </tr>
+                                  
+                                    <tr>
+                                        <td colspan="2" style="color: #000000">
                                             <uc:UCAccionesOTitulos ID="AccionesOTitulos" runat="server" />
-                                   <br />
-                                
-                    <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                        <asp:GridView ID="gvPercepciones" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="gvPercepciones_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            >
-                            <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-
-                            <Columns>
-                                         <asp:BoundField DataField="Clave" HeaderText="Clave">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                                <asp:GridView ID="gvPercepciones" runat="server" AutoGenerateColumns="False" CssClass="page1" onrowcommand="gvPercepciones_RowCommand" ShowHeaderWhenEmpty="True" Width="100%">
+                                    <Columns>
+                                        <asp:BoundField DataField="Clave" HeaderText="Clave">
                                         <ItemStyle HorizontalAlign="Center" />
                                         </asp:BoundField>
                                         <asp:BoundField DataField="TipoPercepcion" HeaderText="Tipo Percepcion">
@@ -499,83 +642,66 @@
                                         <asp:ButtonField CommandName="Eliminar" HeaderText="Eliminar" Text="Eliminar" />
                                     </Columns>
                                 </asp:GridView>
-                        </div>
-                                   </div>
-
                                 <br />
-                                   <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label21" runat="server" class="control-label" Text="* Clave"></asp:Label>
-                                 <asp:DropDownList ID="ddlClave" runat="server" CssClass="form-control" >
+                                <table class="table-bordered">
+                                    <tr>
+                                        <td>* Clave</td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlClave" runat="server" CssClass="form-control0" style="margin-left: 0px">
                                             </asp:DropDownList>
-                                            <asp:Label ID="lblClaveError" runat="server"
-                                                ForeColor="#FF3300" Text="Campo Obligatorio" Visible="False"></asp:Label>
-                                      </div>
-                                       </div>
-                                   <div class = "row">
-                                    <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label22" runat="server" class="control-label" Text="* Dias"></asp:Label>
-                                 <asp:TextBox ID="txtDias" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" 
-                                                runat="server" BehaviorID="_content_FilteredTextBoxExtender1" 
-                                                FilterType="Numbers" TargetControlID="txtDias" />
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" 
-                                                runat="server" ControlToValidate="txtDias" 
-                                                ErrorMessage="Campo Obligatorio" ForeColor="#FF3300"
-                                                ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
-
-                                     </div>
-                                    <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label23" runat="server" class="control-label" Text="* TipoHoras"></asp:Label>
-                                <asp:DropDownList ID="ddlTipoHoras" runat="server" style="margin-left: 0px" CssClass="form-control">
+                                            <asp:Label ID="lblClaveError" runat="server" ForeColor="#FF3300" Text="Campo Obligatorio" Visible="False"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>* Dias</td>
+                                        <td style="text-align: left">
+                                            <asp:TextBox ID="txtDias" runat="server" CssClass="form-control2"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" BehaviorID="_content_FilteredTextBoxExtender1" FilterType="Numbers" TargetControlID="txtDias" />
+                                        </td>
+                                        <td>* TipoHoras</td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlTipoHoras" runat="server"  CssClass="form-control2" style="margin-left: 0px">
                                                 <asp:ListItem Text="Dobles" Value="01" />
                                                 <asp:ListItem Text="Triples" Value="02" />
                                                 <asp:ListItem Text="Simples" Value="03" />
                                             </asp:DropDownList>
-                                        </div>
-                                 <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label24" runat="server" class="control-label" Text="* HorasExtra"></asp:Label>
-                                   <asp:TextBox ID="txtHorasExtra" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
-                                                BehaviorID="_content_FilteredTextBoxExtender2" FilterType="Numbers" 
-                                                TargetControlID="txtHorasExtra" />
-                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator10" 
-                                                runat="server" ControlToValidate="txtHorasExtra"
-                                                ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" 
-                                                ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
-                                     </div>
-                                      <div class = "form-group col-lg-3">
-                                      <asp:Label ID="Label25" runat="server" class="control-label" Text="* ImportePagado"></asp:Label>
-                                   <asp:TextBox ID="txtImportePagado" runat="server" CssClass="form-control"></asp:TextBox>
-                                          <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender5"
-                                            runat="server" BehaviorID="_content_FilteredTextBoxExtender4" 
-                                            FilterType="Custom, Numbers" TargetControlID="txtImportePagado" ValidChars="." />
-                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                            ControlToValidate="txtImportePagado" Display="Dynamic" 
-                                            ErrorMessage="Dato invalido" ForeColor="#FF3300" 
-                                            ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarHorasExtra" />
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" 
-                                            runat="server" ControlToValidate="txtImportePagado" 
-                                            ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" 
-                                            ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
-                                          </div>
-                                       </div>
-
-                                        <div class = "row">
-                                <div class = "form-group col-lg-3">
-                                            <asp:Button ID="btnAgregarHorasExtra" 
-                                                runat="server" CssClass="btn btn-outline-success" onclick="btnAgregarHorasExtra_Click" 
-                                                Text="Agregar Horas Extras" ValidationGroup="AgregarHorasExtra" />
-                                       </div>
-                                            </div>
-
-                                        <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                        <asp:GridView ID="gvHorasExtra" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="gvHorasExtra_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            >
-                            <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                            <Columns>
+                                        </td>
+                                        <td>* HorasExtra</td>
+                                        <td style="text-align: left">
+                                            <asp:TextBox ID="txtHorasExtra" runat="server" CssClass="form-control0"></asp:TextBox>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" BehaviorID="_content_FilteredTextBoxExtender2" FilterType="Numbers" TargetControlID="txtHorasExtra" />
+                                        </td>
+                                        <td>* ImportePagado</td>
+                                        <td>
+                                            <asp:TextBox ID="txtImportePagado" runat="server" CssClass="form-control0"></asp:TextBox>
+                                        </td>
+                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" BehaviorID="_content_FilteredTextBoxExtender4" FilterType="Custom, Numbers" TargetControlID="txtImportePagado" ValidChars="." />
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtImportePagado" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarHorasExtra" />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtImportePagado" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtDias" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtHorasExtra" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarHorasExtra"></asp:RequiredFieldValidator>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                     
+                                        <td class="auto-style166">
+                                            <asp:Button ID="btnAgregarHorasExtra" runat="server" class="btn btn-primary" onclick="btnAgregarHorasExtra_Click" Text="Agregar Horas Extras" ValidationGroup="AgregarHorasExtra" Width="154px" />
+                                        </td>
+                                           <td></td>
+                                    </tr>
+                                </table>
+                               
+                                <asp:GridView ID="gvHorasExtra" runat="server" AutoGenerateColumns="False" CssClass="page1" onrowcommand="gvHorasExtra_RowCommand" ShowHeaderWhenEmpty="True" Width="100%">
+                                    <Columns>
                                         <asp:BoundField DataField="clave" HeaderText="Clave">
                                         <ItemStyle HorizontalAlign="Center" />
                                         </asp:BoundField>
@@ -592,43 +718,46 @@
                                         <asp:ButtonField CommandName="Eliminar" HeaderText="Eliminar" Text="Eliminar" />
                                     </Columns>
                                 </asp:GridView>
-                            </div>
-
+                            </asp:Panel>
                         </ContentTemplate>
                     </asp:TabPanel>
                     <asp:TabPanel ID="PanelDeducciones" runat="server" CssClass="page7" HeaderText="Deducciones">
                         <ContentTemplate>
-
-                             <div class = "row form-group">
-                          <div class = "col-lg-3">
-                 
+                            <table>
+                                <tr>
+                                    <td class="auto-style120" style="font-weight: 700; font-family: Arial, Helvetica, sans-serif">
                                         <asp:CheckBox ID="ChDeducciones" runat="server" AutoPostBack="True" CssClass="page2" OnCheckedChanged="ChDeducciones_CheckedChanged" Text="Deducciones" />
-                         </div>
-                                 </div>
-                             <div class = "row form-group">
-                          <div class = "col-lg-3">
-                             <asp:Label ID="Label26" runat="server" class="control-label" Text="TotalOtrasDeducciones"></asp:Label>
-                                   <asp:TextBox ID="txtTotalOtrasDeducciones" runat="server" Enabled="False" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style120" style="text-align: left">TotalOtrasDeducciones</td>
+                                    <td>
+                                        <asp:TextBox ID="txtTotalOtrasDeducciones" runat="server" Enabled="False" CssClass="form-control2"></asp:TextBox>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server" BehaviorID="_content_FilteredTextBoxExtender4" FilterType="Custom, Numbers" TargetControlID="txtTotalOtrasDeducciones" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtTotalOtrasDeducciones" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura"></asp:RegularExpressionValidator>
-                        </div>
-                              <div class = "col-lg-3">
-                             <asp:Label ID="Label27" runat="server" class="control-label" Text="TotalImpuestosRetenidos"></asp:Label>
-                            <asp:TextBox ID="txtTotalImpuestosRetenidos" runat="server" Enabled="False" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                    <td class="auto-style20">TotalImpuestosRetenidos</td>
+                                    <td>
+                                        <asp:TextBox ID="txtTotalImpuestosRetenidos" runat="server" Enabled="False" CssClass="form-control2"></asp:TextBox>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server" BehaviorID="_content_FilteredTextBoxExtender4" FilterType="Custom, Numbers" TargetControlID="txtTotalImpuestosRetenidos" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtTotalImpuestosRetenidos" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="CrearFactura"></asp:RegularExpressionValidator>
-                             </div>
-                           </div>
-                             <div class = "row form-group">
-                          <div class = "col-lg-3">
-                             <asp:Label ID="Label228" runat="server" class="control-label" Text="* Clave"></asp:Label>
-                                    <asp:TextBox ID="txtClaveDed" runat="server" MaxLength="15" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                           
+                            <table width="100%">
+                                <tr id="Tr3" runat="server">
+                                    <td runat="server" class="auto-style123">&nbsp;* Clave</td>
+                                    <td runat="server" style="width: 40%;text-align: left">
+                                        <asp:TextBox ID="txtClaveDed" runat="server" MaxLength="15" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtClaveDed" ErrorMessage="Campo Obligatorio" ForeColor="Red" ValidationGroup="AgregarDeduccion"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ControlToValidate="txtClaveDed" ErrorMessage="Dato inválido" ForeColor="#FF3300" ValidationExpression="([A-Z]|[a-z]|[0-9]|Ñ|ñ|!|&quot;|%|&amp;|'|´|-|:|;|&gt;|=|&lt;|@|_|,|\{|\}|`|~|á|é|í|ó|ú|Á|É|Í|Ó|Ú|ü|Ü){3,15}" ValidationGroup="AgregarDeduccion"></asp:RegularExpressionValidator>
-                           </div>
-                              <div class = "col-lg-3">
-                             <asp:Label ID="Label29" runat="server" class="control-label" Text="* Tipo Deduccion"></asp:Label>
-                                     <asp:DropDownList ID="ddlTipoDed" runat="server" CssClass="form-control" >
+                                    </td>
+                                </tr>
+                                <tr id="tr4" runat="server">
+                                    <td runat="server" class="auto-style123">* Tipo Deduccion</td>
+                                    <td runat="server" style="width: 40%;text-align: left">
+                                        <asp:DropDownList ID="ddlTipoDed" runat="server"  CssClass="form-control2" style="margin-left: 0px" Width="524px" >
                                             <asp:ListItem Text="Seguridad social" Value="001" />
                                             <asp:ListItem Text="ISR" Value="002" />
                                             <asp:ListItem Text="Aportaciones a retiro, cesantía en edad avanzada y vejez. " Value="003" />
@@ -738,39 +867,35 @@
                                            <asp:ListItem Text="Ajuste al Subsidio Causado" Value="107" />
                                            
                                         </asp:DropDownList>
-                             </div>
-                              <div class = "col-lg-3">
-                             <asp:Label ID="Label30" runat="server" class="control-label" Text="* Concepto"></asp:Label>
-                               <asp:TextBox ID="txtConceptpDed" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style123">* Concepto</td>
+                                    <td>
+                                        <asp:TextBox ID="txtConceptpDed" runat="server" Width="415px" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtConceptpDed" ErrorMessage="Campo Obligatorio" ForeColor="Red" ValidationGroup="AgregarDeduccion"></asp:RequiredFieldValidator>
-                              </div>
-                              <div class = "col-lg-3">
-                             <asp:Label ID="Label31" runat="server" class="control-label" Text="* Importe"></asp:Label>
-                                 <asp:TextBox ID="txtImporteDed" runat="server" Display="Dynamic" 
-                                     ValidationGroup="AgregarDeduccion" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style123">* Importe </td>
+                                    <td style="width: 40%;text-align: left">
+                                        <asp:TextBox ID="txtImporteDed" runat="server" Display="Dynamic" ValidationGroup="AgregarDeduccion" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtImporteDed" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarDeduccion"></asp:RequiredFieldValidator>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender8" runat="server" BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers" TargetControlID="txtImporteDed" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtImporteDed" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarDeduccion" />
-                             </div>
-                                 </div>
-                            
-                             <div class = "row form-group">
-                          <div class = "col-lg-6">
-                            
-                            <asp:Button ID="AgregarDeduccion" runat="server" CssClass="btn btn-outline-success" 
-                                OnClick="AgregarDeduccion_Click" Text="Agregar Deducción" ValidationGroup="AgregarDeduccion" />
-                            </div>
-                                 </div>
-                     
-                                               <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                                                                           <asp:GridView ID="GvDeducciones" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="GvDeducciones_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            >
-                            <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                            <Columns>
-                     
-               <asp:BoundField DataField="Clave" HeaderText="Clave">
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="AgregarDeduccion" runat="server" class="btn btn-primary" OnClick="AgregarDeduccion_Click" Text="Agregar Deducción" ValidationGroup="AgregarDeduccion" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style123">&nbsp;</td>
+                                    <td style="width: 40%;text-align: left">&nbsp;</td>
+                                </tr>
+                            </table>
+                            <asp:GridView ID="GvDeducciones" runat="server" AutoGenerateColumns="False" CssClass="page1" onrowcommand="GvDeducciones_RowCommand" ShowHeaderWhenEmpty="True" Width="100%">
+                                <Columns>
+                                    <asp:BoundField DataField="Clave" HeaderText="Clave">
                                     <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="TipoDeduccion" HeaderText="Tipo De duccion">
@@ -783,23 +908,24 @@
                                     <asp:ButtonField CommandName="Eliminar" HeaderText="Eliminar" Text="Eliminar" />
                                 </Columns>
                             </asp:GridView>
-                                                   </div>
-
                         </ContentTemplate>
                     </asp:TabPanel>
                     <asp:TabPanel ID="TabPanel3" runat="server" CssClass="page3" HeaderText="Otros Pagos" Visible="true">
                         <ContentTemplate>
                             
-                             <div class = "row ">
-                          <div class = "form-group col-lg-3">
-                             <asp:Label ID="Label328" runat="server" class="control-label" Text="* Clave"></asp:Label>
-                               <asp:TextBox ID="txtClaveOtros" runat="server" MaxLength="15" CssClass="form-control"></asp:TextBox>
+                            <table>
+                                <tr id="Tr5" runat="server">
+                                    <td runat="server" class="auto-style124">&nbsp;* Clave</td>
+                                    <td runat="server" class="auto-style117" style="text-align: left">
+                                        <asp:TextBox ID="txtClaveOtros" runat="server" MaxLength="15" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="txtClaveOtros" ErrorMessage="Campo Obligatorio" ForeColor="Red" ValidationGroup="AgregarOtros"></asp:RequiredFieldValidator>
-                          </div>
-                                 <div class = "form-group col-lg-3">
-                             <asp:Label ID="Label32" runat="server" class="control-label" Text="* Tipo Otro Pago"></asp:Label>
-                                    <asp:DropDownList ID="ddlTipoOtros" runat="server" 
-                                        CssClass="form-control">
+                                    </td>
+                                </tr>
+                                <tr id="tr6" runat="server">
+                                    <td runat="server" class="auto-style125" style="text-align: left">* Tipo Otro Pago</td>
+                                    <td runat="server" class="auto-style117" style="text-align: left">
+                                        <asp:DropDownList ID="ddlTipoOtros" runat="server"  CssClass="form-control2" 
+                                            style="margin-left: 0px" Width="555px" >
                                             <asp:ListItem Text="Reintegro de ISR pagado en exceso (siempre que no haya sido enterado al SAT)" Value="001" />
                                             <asp:ListItem Text="Subsidio para el empleo (efectivamente entregado al trabajador)" Value="002" />
                                             <asp:ListItem Text="Viáticos (entregados al trabajador)" Value="003" />
@@ -810,50 +936,45 @@
                                             <asp:ListItem Text="Subsidio efectivamente entregado que no correspondía (aplica solo cuando haya ajuste al cierre de mes en relación con el apéndice 7 de la guía de llenado de nómina)" Value="008" />
                                             <asp:ListItem Text="Pagos distintos a los listados y que no deben considerarse como ingreso por sueldos, salarios o ingresos asimilados" Value="999" />
                                         </asp:DropDownList>
-                              </div>
-                                 <div class = "form-group col-lg-3">
-                             <asp:Label ID="Label33" runat="server" class="control-label" Text="* Concepto"></asp:Label>
-                                 <asp:TextBox ID="txtConceptoOtros" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style125" style="text-align: left">* Concepto</td>
+                                    <td class="auto-style117">
+                                        <asp:TextBox ID="txtConceptoOtros" runat="server" Width="415px" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ControlToValidate="txtConceptoOtros" ErrorMessage="Campo Obligatorio" ForeColor="Red" ValidationGroup="AgregarOtros"></asp:RequiredFieldValidator>
-                                </div>
-                                 <div class = "form-group col-lg-3">
-                                 <asp:Label ID="Label34" runat="server" class="control-label" Text="* Importe"></asp:Label>
-                                    <asp:TextBox ID="txtImporteOtros" runat="server"
-                                        Display="Dynamic" ValidationGroup="AgregarOtros" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style124">* Importe </td>
+                                    <td class="auto-style117" style="text-align: left">
+                                        <asp:TextBox ID="txtImporteOtros" runat="server" Display="Dynamic" ValidationGroup="AgregarOtros" CssClass="form-control2"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ControlToValidate="txtImporteOtros" ErrorMessage="Campo Obligatorio" ForeColor="#FF3300" ValidationGroup="AgregarOtros"></asp:RequiredFieldValidator>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender9" runat="server" BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers" TargetControlID="txtImporteOtros" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ControlToValidate="txtImporteOtros" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarOtros" />
-                                </div>
-                                 </div>
-                             <div class = "row">
-                          <div class = " form-group col-lg-3">
-                             <asp:Label ID="Label35" runat="server" class="control-label" Text="SubsidioCausado"></asp:Label>
-                                       <asp:TextBox ID="txtSubsidio" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style125" style="text-align: left">SubsidioCausado</td>
+                                    <td class="auto-style117" style="text-align: left">
+                                        <asp:TextBox ID="txtSubsidio" runat="server"  CssClass="form-control2"></asp:TextBox>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender10" runat="server" BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers" TargetControlID="txtSubsidio" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ControlToValidate="txtSubsidio" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarOtros" />
-                           </div>
-                          <div class = "col-lg-4 form-inline">
-                                 <asp:CheckBox ID="ChCompensacionSaldosAFavor"  runat="server" AutoPostBack="True" 
-                                     OnCheckedChanged="ChCompensacionSaldosAFavor_CheckedChanged" Text="CompensacionSaldosAFavor" />
-                       </div>
-                                 </div>
-
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="ChCompensacionSaldosAFavor" runat="server" AutoPostBack="True" CssClass="page2" OnCheckedChanged="ChCompensacionSaldosAFavor_CheckedChanged" Text="CompensacionSaldosAFavor" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </table>
                             <uc:UCOtrosPagos ID="UCOtrosPagos" runat="server" />
                             <br />
-                               <div class = "row form-group">
-                          <div class = "col-lg-3">
-                          
-                            <asp:Button ID="AgregarOtros" runat="server" CssClass="btn btn-outline-success"  OnClick="AgregarOtros_Click" Text="Agregar Otros Pagos" ValidationGroup="AgregarOtros" />
-                            </div>
-                                  </div>
-                                        <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                                                                    <asp:GridView ID="GvOtrosPagos" runat="server" AutoGenerateColumns="False" GridLines="None" 
-
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="GvOtrosPagos_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            >
-                            <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                            <Columns>
+                            <asp:Button ID="AgregarOtros" runat="server" class="btn btn-primary" OnClick="AgregarOtros_Click" Text="Agregar Otros Pagos" ValidationGroup="AgregarOtros" />
+                            
+                            <asp:GridView ID="GvOtrosPagos" runat="server" AutoGenerateColumns="False" CssClass="page1" onrowcommand="GvOtrosPagos_RowCommand" ShowHeaderWhenEmpty="True" Width="100%">
+                                <Columns>
                                     <asp:BoundField DataField="Clave" HeaderText="Clave">
                                     <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
@@ -873,52 +994,44 @@
                                     <asp:ButtonField CommandName="Eliminar" HeaderText="Eliminar" Text="Eliminar" />
                                 </Columns>
                             </asp:GridView>
-                                            </div>
-
                         </ContentTemplate>
                     </asp:TabPanel>
                     <asp:TabPanel ID="TabPanel2" runat="server" CssClass="page3" HeaderText="Incapacidades" Visible="true">
                         <ContentTemplate>
-                             <div class = "row ">
-                           <div class = "form-group col-lg-3">
-                             <asp:Label ID="Label428" runat="server" class="control-label" Text="DiasIncapacidad"></asp:Label>
-                               <asp:TextBox ID="txtDiasIncapacidad" runat="server" CssClass="form-control"></asp:TextBox>
+                            <table align="center">
+                                <tr>
+                                    <td class="auto-style118">DiasIncapacidad</td>
+                                    <td class="auto-style119">
+                                        <asp:TextBox ID="txtDiasIncapacidad" runat="server" CssClass="form-control2"></asp:TextBox>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender12" runat="server" BehaviorID="_content_FilteredTextBoxExtender12" FilterType="Numbers" TargetControlID="txtDiasIncapacidad" />
-                             </div>
-                           <div class = "form-group col-lg-3">
-                             <asp:Label ID="Label36" runat="server" class="control-label" Text="TipoIncapacidad"></asp:Label>
-                                    <asp:DropDownList ID="ddlTipoIncapacidad" runat="server" style="margin-left: 0px" 
-                                        CssClass="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style118">TipoIncapacidad</td>
+                                    <td class="auto-style119">
+                                        <asp:DropDownList ID="ddlTipoIncapacidad" runat="server" style="margin-left: 0px" CssClass="form-control2">
                                             <asp:ListItem Text="Riesgo de trabajo" Value="01" />
                                             <asp:ListItem Text="Enfermedad en general" Value="02" />
                                             <asp:ListItem Text="Maternidad" Value="03" />
                                               <asp:ListItem Text="Licencia por cuidados médicos de hijos diagnosticados con cáncer" Value="04" />
                                         </asp:DropDownList>
-                            </div>
-                              </div>
-                                <div class = "row ">
-                           <div class = "form-group col-lg-3">
-                           <asp:Label ID="Label828" runat="server" class="control-label" Text="ImporteMonetario"></asp:Label>
-                                   <asp:TextBox ID="txtImporteMonetario" runat="server"  CssClass="form-control"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="auto-style118">ImporteMonetario</td>
+                                    <td class="auto-style119">
+                                        <asp:TextBox ID="txtImporteMonetario" runat="server"  CssClass="form-control2"></asp:TextBox>
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender11" runat="server" BehaviorID="_content_FilteredTextBoxExtender3" FilterType="Custom, Numbers" TargetControlID="txtImporteMonetario" ValidChars="." />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ControlToValidate="txtImporteMonetario" Display="Dynamic" ErrorMessage="Dato invalido" ForeColor="#FF3300" ValidationExpression="\d+\.?\d?\d?" ValidationGroup="AgregarIncapacidad" />
-                              </div>
-                                    </div>
-                                <div class = "row ">
-                              <div class = "form-group col-lg-3">
-                                      <asp:Button ID="btnAgregarIncapacidad" runat="server" class="btn btn-outline-success" 
-                                          OnClick="btnAgregarIncapacidad_Click" Text="Agregar Incapacidad"
-                                          ValidationGroup="AgregarIncapacidad" />
-                             </div>
-                              </div>
-                                    <br />
-                                        <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                        <asp:GridView ID="GridIncapacidad" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Center"
-                            OnRowCommand="GridIncapacidad_RowCommand"   CssClass="table table-hover table-striped grdViewTable"
-                            >
-                            <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                            <Columns>
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="btnAgregarIncapacidad" runat="server" class="btn btn-primary" OnClick="btnAgregarIncapacidad_Click" Text="Agregar Incapacidad" ValidationGroup="AgregarIncapacidad" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <asp:GridView ID="GridIncapacidad" runat="server" AutoGenerateColumns="False" CssClass="page7" OnRowCommand="GridIncapacidad_RowCommand" ShowHeaderWhenEmpty="True" Width="100%">
+                                <Columns>
                                     <asp:BoundField DataField="DiasIncapacidad" HeaderText="Dias Incapacidad">
                                     <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
@@ -929,37 +1042,29 @@
                                     <asp:ButtonField CommandName="Eliminar" HeaderText="Eliminar" Text="Eliminar" />
                                 </Columns>
                             </asp:GridView>
-                                            </div>
                         </ContentTemplate>
                     </asp:TabPanel>
                 </asp:TabContainer>
             </div>
-
-</ContentTemplate>
-                      </asp:UpdatePanel>
-
-
             <br />
-     
-
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="up1" >
-<ProgressTemplate>
-    <div class="modalUP" >
-        <div class="centerUP">
-                 
-                 <asp:Image ID="Image1" runat="server"  ImageUrl="imagen/ajax-loader.gif" />
-                 <br class="auto-style1" />
-                 <span class="auto-style1"><strong>CFDI en proceso .. </strong></span>
-        </div>
-    </div>
-</ProgressTemplate>
-</asp:UpdateProgress>
-
-                     </div>
-                </div>
-
-
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="up1">
+                <ProgressTemplate>
+                    <div id="Background">
+                    </div>
+                    <div id="Progress">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br></br>
+                        CFDI en proceso ..
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+         <div style="float:left">
             <asp:Label ID="lblError" runat="server" ForeColor="Red" />
+             </div>
             <div style="float: right">
                 <table style="text-align:right;">
                     <tr class="auto-style162">
@@ -992,20 +1097,13 @@
             <div style="clear: both">
             </div>
             <p align="right">
-                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-outline-success" onclick="btnLimpiar_Click" Text="Limpiar" />
+                <asp:Button ID="btnLimpiar" runat="server" class="btn btn-primary" onclick="btnLimpiar_Click" Text="Limpiar" />
                 &nbsp;&nbsp;&nbsp;
-                <asp:Button ID="BtnVistaPrevia" runat="server" CssClass="btn btn-outline-success" onclick="btnGenerarPreview_Click" Text="Vista Previa" ValidationGroup="CrearFactura" />
+                <asp:Button ID="BtnVistaPrevia" runat="server" class="btn btn-primary" onclick="btnGenerarPreview_Click" Text="Vista Previa" ValidationGroup="CrearFactura" />
                 &nbsp;&nbsp;&nbsp;
-
-<%--                <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" ConfirmText="Confirma que deseas generar el comprobante" TargetControlID="btnGenerarFactura" />--%>
-                  <asp:Button ID="btnGenerarFactura" runat="server" class="btn btn-outline-success" Text="Generar Recibo" 
-                         OnClick="btnGenerarFactura_Click"/>
+                <asp:Button ID="btnGenerarFactura" runat="server" class="btn btn-primary" onclick="btnGenerarFactura_Click" Text="Generar Recibo" ValidationGroup="CrearFactura" />
+                <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" ConfirmText="Confirma que deseas generar el comprobante" TargetControlID="btnGenerarFactura" />
             </p>
-</div>
-         </div>
-            </div>
-        </section>
-
             <asp:ModalPopupExtender ID="mpeBuscarConcepto" runat="server" BackgroundCssClass="mpeBack" CancelControlID="btnCerrarConcepto" PopupControlID="pnlBuscarConcepto" TargetControlID="btnConceptoDummy" />
             <asp:Panel ID="pnlBuscarConcepto" runat="server" BackColor="White" style="text-align: center;" Width="800px">
                 <h1>
@@ -1116,12 +1214,10 @@
                     <p>
                     </p>
                 </p>
-            </asp:Panel>
-        
-        <asp:Button runat="server" ID="btnConceptoDummy" Style="display: none;" />
+            </asp:Panel><asp:Button runat="server" ID="btnConceptoDummy" Style="display: none;" />
 
             <asp:ModalPopupExtender runat="server" ID="mpeCFDIG" TargetControlID="btngenerarDummy"
-        BackgroundCssClass="modalBackground"  PopupControlID="pnlMSG" />
+        BackgroundCssClass="mpeBack"  PopupControlID="pnlMSG" />
 
  <asp:ModalPopupExtender runat="server" ID="mpeSellos" TargetControlID="btnSelloDummy" 
         BackgroundCssClass="mpeBack"  PopupControlID="pnlSello" />
@@ -1139,23 +1235,17 @@
         <br />
         <br />
         <asp:Button runat="server" ID="btclose" Text="Aceptar"  class="btn btn-primary"  OnClick="btclose_Click"/>
-  
-        </asp:Panel>
-   
-        <asp:Button runat="server" ID="btnSelloDummy" Style="display: none;" />
+    </asp:Panel>
+    <asp:Button runat="server" ID="btnSelloDummy" Style="display: none;" />
 
 
-    <asp:Panel runat="server" ID="pnlMSG" CssClass="modalPopup" Style="display: none">
-        <div class="header" >
-            Mensaje
-        </div>
-        <div class="body">
+    <asp:Panel runat="server" ID="pnlMSG" Style="text-align: center;"  CssClass="page3"
+        BackColor="#A8CF38" Height="98px" Width="418px" BorderStyle="Groove">
         <h1 class="style161" style="color: #000000">
             <strong>Comprobante generado correctamente y enviado por correo electrónico</strong></h1>
         <br />
         <%--<asp:Button runat="server" ID="btnSeleccionarConcepto" Text="Seleccionar" onclick="btnSeleccionarConcepto_Click" />&nbsp;&nbsp;--%>
         <asp:Button runat="server" ID="btnCerrar" Text="Aceptar"  class="btn btn-primary" OnClick="btnCerrar_Click" />
-            </div>
 
         &nbsp;<script type="text/javascript"> 
 
@@ -1164,33 +1254,6 @@
 </script></asp:Panel>
     <asp:Button runat="server" ID="btngenerarDummy" Style="display: none;" />
  
-
-        <asp:Button ID="btnShowFac" runat="server" Style="display:none"  Text="Show Modal Popup" />
-     <asp:ModalPopupExtender ID="mpexFac" runat="server" PopupControlID="pnlPopupFac" TargetControlID="btnShowFac"
-        OkControlID="btnYesFac" CancelControlID="btnNoFac"  BackgroundCssClass="modalBackground">
-    </asp:ModalPopupExtender>
-    <asp:Panel ID="pnlPopupFac" runat="server" CssClass="modalPopup" Style="display: none">
-        <div class="header" >
-            Generar la factura
-        </div>
-        <div class="body">
-            <br />
-          &nbsp;&nbsp;  Confirma que deseas generar el comprobante
-        </div>
-        <div class="footer" >
-      
-            <asp:Button ID="btnYesFac" runat="server" Text="Yes" Style="display:none" CssClass="yes" />
-                   <asp:LinkButton ID="lnkDeleteFac" CssClass="btn btn-outline-success" OnClientClick="okClick();"
-                       OnClick="lnkDeleteFac_Click"  runat="server" >
-                            Generar <i class="fa fa-check-square-o" title="aceptar"></i> 
-                                </asp:LinkButton>
-                        
-            <asp:Button ID="btnNoFac" runat="server" Text="Cancelar"  CssClass="btn btn-outline-success"  />
-        </div>
-    </asp:Panel>
-
-
-
 	</ContentTemplate>
 	<Triggers>
 		<asp:PostBackTrigger ControlID="btnLimpiar" />

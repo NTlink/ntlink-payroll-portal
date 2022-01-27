@@ -22,24 +22,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// Control Label8.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
-        
-        /// <summary>
-        /// Control Label2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
         /// Control txtRFC.
         /// </summary>
         /// <remarks>
@@ -47,15 +29,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRFC;
-        
-        /// <summary>
-        /// Control Label3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// Control txtRazonSocial.
@@ -67,15 +40,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.TextBox txtRazonSocial;
         
         /// <summary>
-        /// Control Label4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
-        
-        /// <summary>
         /// Control ddlRegimen.
         /// </summary>
         /// <remarks>
@@ -85,15 +49,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.DropDownList ddlRegimen;
         
         /// <summary>
-        /// Control Label5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
-        
-        /// <summary>
         /// Control txtCURP.
         /// </summary>
         /// <remarks>
@@ -101,15 +56,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCURP;
-        
-        /// <summary>
-        /// Control Label6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
         /// Control txtCalle.
@@ -130,15 +76,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRegimen0;
         
         /// <summary>
-        /// Control Label7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
-        
-        /// <summary>
         /// Control txtNoExt.
         /// </summary>
         /// <remarks>
@@ -157,15 +94,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRegimen4;
         
         /// <summary>
-        /// Control Label9.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
-        
-        /// <summary>
         /// Control txtNoInt.
         /// </summary>
         /// <remarks>
@@ -175,15 +103,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.TextBox txtNoInt;
         
         /// <summary>
-        /// Control Label10.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
-        
-        /// <summary>
         /// Control txtColonia.
         /// </summary>
         /// <remarks>
@@ -191,15 +110,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtColonia;
-        
-        /// <summary>
-        /// Control Label11.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
         /// Control txtMunicipio.
@@ -220,15 +130,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRegimen1;
         
         /// <summary>
-        /// Control Label12.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-        
-        /// <summary>
         /// Control txtEstado.
         /// </summary>
         /// <remarks>
@@ -245,15 +146,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRegimen2;
-        
-        /// <summary>
-        /// Control Label13.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
         /// Control txtCP.
@@ -274,15 +166,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRegimen3;
         
         /// <summary>
-        /// Control Label14.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label14;
-        
-        /// <summary>
         /// Control txtTelefono.
         /// </summary>
         /// <remarks>
@@ -290,15 +173,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
-        
-        /// <summary>
-        /// Control Label15.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
         
         /// <summary>
         /// Control txtEmail.
@@ -310,15 +184,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// Control Label16.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label16;
-        
-        /// <summary>
         /// Control txtWeb.
         /// </summary>
         /// <remarks>
@@ -328,15 +193,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.TextBox txtWeb;
         
         /// <summary>
-        /// Control Label17.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
-        
-        /// <summary>
         /// Control txtLeyendaSuperior.
         /// </summary>
         /// <remarks>
@@ -344,15 +200,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLeyendaSuperior;
-        
-        /// <summary>
-        /// Control Label18.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
         /// Control txtLeyendaPie.
@@ -373,15 +220,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.Panel pnlSucursal;
         
         /// <summary>
-        /// Control Label19.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label19;
-        
-        /// <summary>
         /// Control txtSucursal.
         /// </summary>
         /// <remarks>
@@ -398,15 +236,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSucursal;
-        
-        /// <summary>
-        /// Control Label20.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label20;
         
         /// <summary>
         /// Control txtLugarExpedicion.
@@ -427,15 +256,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLugarExpedicion;
         
         /// <summary>
-        /// Control Label21.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label21;
-        
-        /// <summary>
         /// Control txtContacto.
         /// </summary>
         /// <remarks>
@@ -445,15 +265,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.TextBox txtContacto;
         
         /// <summary>
-        /// Control Label22.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label22;
-        
-        /// <summary>
         /// Control ddlOrientacion.
         /// </summary>
         /// <remarks>
@@ -461,15 +272,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOrientacion;
-        
-        /// <summary>
-        /// Control Label23.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label23;
         
         /// <summary>
         /// Control fuLogoEmpresa.
@@ -499,24 +301,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.Button btnCancelar;
         
         /// <summary>
-        /// Control Div2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
-        
-        /// <summary>
-        /// Control Label24.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label24;
-        
-        /// <summary>
         /// Control fuCertificado.
         /// </summary>
         /// <remarks>
@@ -535,15 +319,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.Label lblVencimiento;
         
         /// <summary>
-        /// Control Label25.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label25;
-        
-        /// <summary>
         /// Control fuLlave.
         /// </summary>
         /// <remarks>
@@ -560,15 +335,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAdvertencia;
-        
-        /// <summary>
-        /// Control Label26.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label26;
         
         /// <summary>
         /// Control txtPassWordLlave.

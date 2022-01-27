@@ -90,19 +90,6 @@ namespace GafLookPaid
             }
         }
 
-        protected void btnNo7_Click(object sender, EventArgs e)
-        {
-            this.logMain.Enabled = true;
-            mpePasswordChange.Hide();
-          //  UpdatePanel4.Update();
-        }
-        //protected void cb1_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (cb1.Checked)
-        //        btnAceptarPassword.Enabled = true;
-        //    else btnAceptarPassword.Enabled = false;
-        //}
-
         protected void btnAceptarPassword_Click(object sender, EventArgs e)
         {
             var cliente = NtLinkClientFactory.Cliente();
@@ -120,13 +107,7 @@ namespace GafLookPaid
 
         protected void btnOlvidar_Click(object sender, EventArgs e)
         {
-            this.logMain.Enabled = false;
-
-            lblMensajePass.Text = "";
-            txtOlvide.Text = "";
-            txtRfcOlvide.Text = "";
-            UpdatePanel5.Update();
-            this.mpePasswordChange.Show();
+            this.divPasswordChange.Visible = true;
         }
 
         protected void btnEnviarPass_Click(object sender, EventArgs e)

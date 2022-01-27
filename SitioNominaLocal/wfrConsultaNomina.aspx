@@ -1,99 +1,87 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="wfrConsultaNomina.aspx.cs" Inherits="GafLookPaid.wfrConsultaNomina" %>
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-<%--     <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />--%>
-    
-       <link href="Content/bootstrap.min.css" rel="stylesheet" />
-      <link href="Content/bootstrap.css" rel="stylesheet" />
-      <script src="Scripts/chosen.jquery.js" ></script>
-   
+     <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   
-     <div  class = "card mt-2">   
-            <div class="card-header">
-               <h3>Reporte de CFDI</h3>
-            </div>
-            <div class ="card-body" >
-                  <div class = "row form-group"> 
-           <div class="col-lg-12 " style="color:red;" >
-                            <asp:Label ID="lblError" class="control-label" runat="server" ForeColor="Red" Font-Bold="true" style=" font-size: x-small; text-align: left; font-variant: small-caps;" Width="250px"></asp:Label>
-            </div>
-            </div>
-             <div class = "row form-group"> 
-           <div class="col-lg-12 " >
-                 <a href="https://portalcfdi.facturaelectronica.sat.gob.mx" target="_blank" 
-                     class="auto-style3">Sitio de cancelación del SAT</a><span class="auto-style3"> </span>
-               </div>
-    </div>
-            <div class = "row">
-                   <div class = "form-group col-lg-10">
-                         <asp:Label ID="Label1" runat="server" class="control-label" Text="Empresa"></asp:Label>
-        	    <asp:DropDownList runat="server" ID="ddlEmpresas" AutoPostBack="true" DataTextField="RazonSocial"
-		DataValueField="idEmpresa" onselectedindexchanged="ddlEmpresas_SelectedIndexChanged"  CssClass="form-control"/>
-                       </div>
-                </div>
-                <div class = "row">
-                   <div class = "form-group col-lg-3">
-                         <asp:Label ID="Label2" runat="server" class="control-label" Text="Fecha Inicial"></asp:Label>
-        		<asp:TextBox runat="server" ID="txtFechaInicial" CssClass="form-control" />
+    <style type="text/css">
+	.mpeBack
+	{
+		background-color: Gray;
+		filter: alpha(opacity=70);
+		opacity: 0.7;
+	}
+	    .auto-style1 {
+            text-align: center;
+        }
+	    .auto-style2 {
+            text-align: left;
+        }
+        .auto-style3 {
+            color: #800000;
+        }
+	</style>
+	<h1>Reporte de CFDI</h1>
+	<p>
+		<asp:Label runat="server" ID="lblError" ForeColor="Red" />
+	</p>
+    <p class="auto-style2">
+        <a href="https://portalcfdi.facturaelectronica.sat.gob.mx" target="_blank" class="auto-style3">Sitio de cancelación del SAT</a><span class="auto-style3"> </span>
+    </p>
+	
+    
+	<div style="clear: both"></div>
+	<table>
+		<tr>
+            <td>Empresa:</td>
+            <td style="text-align: left">
+                <asp:DropDownList runat="server" ID="ddlEmpresas" AutoPostBack="true" DataTextField="RazonSocial"
+		DataValueField="idEmpresa" onselectedindexchanged="ddlEmpresas_SelectedIndexChanged" style="margin-left: 19px" /></td>
+		</tr>	<tr>
+                <td>Fecha Inicial:</td>
+			<td>
+				<asp:TextBox runat="server" ID="txtFechaInicial" Width="75px" CssClass="form-control2" />
 				<asp:CompareValidator runat="server" ID="cvFechaInicial" ControlToValidate="txtFechaInicial" Display="Dynamic" 
 				 ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
 				<asp:CalendarExtender runat="server" ID="ceFechaInicial" Animated="False" PopupButtonID="txtFechaInicial" TargetControlID="txtFechaInicial" Format="dd/MM/yyyy" />
-			</div>
-                    <div class = "form-group col-lg-3">
-                         <asp:Label ID="Label3" runat="server" class="control-label" Text="Fecha Final"></asp:Label>
-        		<asp:TextBox runat="server" ID="txtFechaFinal"  CssClass="form-control"/>
+			</td>
+			<td>Fecha Final:</td>
+			<td>
+				<asp:TextBox runat="server" ID="txtFechaFinal"  CssClass="form-control2"/>
 				<asp:CompareValidator runat="server" ID="cvFechaFinal" ControlToValidate="txtFechaFinal" Display="Dynamic" 
 				 ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
-				<asp:CalendarExtender runat="server" ID="ceFechaFinal" Animated="False"
-                    PopupButtonID="txtFechaFinal" TargetControlID="txtFechaFinal" Format="dd/MM/yyyy" />
-			</div>
-                    </div>
-		  <div class = "row">
-                   <div class = "form-group col-lg-4">
-                         <asp:Label ID="Label4" runat="server" class="control-label" Text="Empleados"></asp:Label>
-        		<asp:DropDownList runat="server" ID="ddlClientes" AppendDataBoundItems="True" 
-                    CssClass="form-control" DataTextField="NombreCompleto"
-			 DataValueField="idCliente"  />
-                       </div>
-			       <div class = "form-group col-lg-4">
-                         <asp:Label ID="Label5" runat="server" class="control-label" Text="Texto"></asp:Label>
-        	<asp:TextBox runat="server" ID="txtTexto" CssClass="form-control"/>
-                       </div>
-              </div>
-                 <div class = "row">
-                   <div class = "form-group col-lg-4">
-         
+				<asp:CalendarExtender runat="server" ID="ceFechaFinal" Animated="False" PopupButtonID="txtFechaFinal" TargetControlID="txtFechaFinal" Format="dd/MM/yyyy" />
+			</td>
+			<td />
+		</tr>
+		<tr>
+			<td>Empleados:</td>
+			<td><asp:DropDownList runat="server" ID="ddlClientes" AppendDataBoundItems="True"  CssClass="form-control2" DataTextField="NombreCompleto"
+			 DataValueField="idCliente" Width="400px" style="margin-left: 0px" /></td>
+			<td>Texto:</td>
+			<td><asp:TextBox runat="server" ID="txtTexto" CssClass="form-control2"/></td>
+			<td />
+		</tr>
+		<tr>
+			<td />
+			<td>
 				<asp:RadioButtonList RepeatDirection="Horizontal" ID="rbStatus" runat="server" Width="239px">
 					<asp:ListItem Text="Todas" Value="Todos" Selected="True"/>
 				    <asp:ListItem Text="Canceladas" Value="Cancelado"/>
 				
 				</asp:RadioButtonList>
-                       </div>
-                     </div>
-			 <div class = "row">
-                   <div class = "form-group col-lg-6">
-         
-                <asp:Button runat="server"   CssClass="btn btn-outline-success" ID="btnBuscar" Text="Buscar" 
-			 onclick="btnBuscar_Click" />
-			<asp:Button runat="server" ID="btnExportar"   CssClass="btn btn-outline-success"
-                Text="Exportar Excel" onclick="btnExportar_Click" />
-                       </div>
-                 </div>
-		<br />
-                 <div class="border border-success" style=" width:95%;   background-color: #2d282808;margin:0px auto  " >
-                        <asp:GridView ID="gvFacturas"  DataKeyNames="Guid,IdCliente,idventa" runat="server" AutoGenerateColumns="False" GridLines="None" 
-                          ShowHeaderWhenEmpty="True" Width="100%"  AlternatingRowStyle-HorizontalAlign="Left"
-                             RowStyle-HorizontalAlign="Left"  onrowcommand="gvFacturas_RowCommand" onpageindexchanging="gvFacturas_PageIndexChanging" 
-		  OnRowDataBound  ="gvFacturas_RowDataBound" OnPreRender="gvFacturas_PreRender" PageSize="6"
-                            CssClass="table table-hover table-striped grdViewTable"    >
-                                 <rowstyle Height="6px" /><alternatingrowstyle  Height="6px"/>
-                          
-                     <EmptyDataTemplate>
-            No se encontraron registros.
-        </EmptyDataTemplate>
 
+			</td>
+			<td />
+			<td style="text-align: right;"><asp:Button runat="server" class="btn btn-primary" ID="btnBuscar" Text="Buscar" 
+			 onclick="btnBuscar_Click" /></td>
+			<td><asp:Button runat="server" ID="btnExportar" class="btn btn-primary" Text="Exportar Excel" onclick="btnExportar_Click" /></td>
+		</tr>
+	</table><br />
+	<asp:GridView ShowFooter="True" runat="server" ID="gvFacturas" AutoGenerateColumns="False" DataKeyNames="Guid,IdCliente,idventa"
+		onrowcommand="gvFacturas_RowCommand" AllowPaging="True" PageSize="6" Width="97%" CssClass="page2" class="btn btn-primary"
+		onpageindexchanging="gvFacturas_PageIndexChanging" 
+		onrowdatabound="gvFacturas_RowDataBound" OnPreRender="gvFacturas_PreRender">
 		<PagerSettings Position="Bottom" Visible="true" />
 	    <FooterStyle BackColor="GreenYellow" Font-Bold="True" />
 		<Columns>
@@ -118,13 +106,12 @@
             <asp:TemplateField  HeaderText="Cancelar">
                 <ItemTemplate>
                     <asp:Button runat="server" Text='<%# (short)Eval("Cancelado") == 1 ? "Acuse Cancelacion" : "Cancelar"  %>'  CommandName='<%# (short)Eval("Cancelado") == 1 ? "Acuse" : "Cancelar"  %>' ID="btnCancelarf" CommandArgument='<%#Eval("idventa") %>' />
-                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" TargetControlID="btnCancelarf" ConfirmText="¿Cancelar Documento?" Enabled='<%# (short)Eval("Cancelado") != 1  %>' />
+<%--                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" TargetControlID="btnCancelarf" ConfirmText="¿Cancelar Documento?" Enabled='<%# (short)Eval("Cancelado") != 1  %>' />--%>
                 </ItemTemplate>
             </asp:TemplateField>
 		</Columns>
 	</asp:GridView> 
-   </div>
-
+   
 	<asp:GridView ID="gvFacturaCustumer" Visible="False" runat="server" AutoGenerateColumns="False" >
         <Columns>
             <asp:BoundField DataField="folio" HeaderText="Folio" />
@@ -143,9 +130,7 @@
         </Columns>
     </asp:GridView>
     <br />
-</div>
-         </div>
-
+   
 	<asp:ModalPopupExtender runat="server" ID="mpePagar" TargetControlID="btnpagarDummy" BackgroundCssClass="mpeBack"
 	 CancelControlID="btnCerrarPagar" PopupControlID="pnlPagar" />
 	<asp:Panel runat="server" ID="pnlPagar" CssClass="ventana" BackColor="#DDDDDD" Width="600px" style="text-align: center;">
@@ -172,6 +157,54 @@
 		<br /><br />
 	</asp:Panel>
 
+          <asp:ModalPopupExtender runat="server" ID="mpeCancelar" TargetControlID="btnCancelarDummy" BackgroundCssClass="mpeBack"
+	 CancelControlID="btnCerrarCancelar" PopupControlID="pnlCancelar" />
+	<asp:Panel runat="server" ID="pnlCancelar" style="text-align: center;" CssClass="page3"  BackColor="White">
+		<h1>Cancelar CFDI</h1>
+		 <asp:UpdatePanel ID="up11" runat="server"  UpdateMode="Conditional" >
+    <ContentTemplate>
+    
+        <table class="table" align="center">
+         <tr>
+		<td>
+        	Motivo: <asp:Label runat="server" ID="txtMotivo" />
+             <asp:DropDownList runat="server" ID="ddlMotivo" style="margin-left: 0px" AutoPostBack="True"  onselectedindexchanged="ddlMotivo_SelectedIndexChanged"
+              CssClass="form-control2"  Width="250px">
+                         <asp:ListItem runat="server" Value="01" Text="Comprobante emitido con errores con relación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="02" Text="Comprobante emitido con errores sin relación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="03" Text="No se llevó a cabo la operación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="04" Text="Operación nominativa relacionada en la factura global" ></asp:ListItem>
+                    </asp:DropDownList>   
+		</td>
+        </tr>
+		
+			<tr>
+        <td>
+			FolioSustituto:
+			<asp:TextBox runat="server" ID="txtFolioSustituto" CssClass="form-control0" Width="90%" 
+                 />
+		</td>
+		</tr>
+        </table>
+        </ContentTemplate>
+          <Triggers>
+                   <asp:AsyncPostBackTrigger ControlID="ddlMotivo" EventName="SelectedIndexChanged" /> 
+   
+     </Triggers>             
+        </asp:UpdatePanel>
+   
+        <table class="table" align="center">
+
+		<tr>
+        <td><asp:Button runat="server" ID="btnCancelarSAT" Text="Cancelar" onclick="btnCancelarSAT_Click"  class="btn btn-primary"/>&nbsp;&nbsp;
+		<asp:Button runat="server" ID="btnCerrarCancelar" Text="Salir" class="btn btn-primary"/>
+        </td>
+        </tr>
+        </table>
+	</asp:Panel>
+
+
+
 	<asp:ModalPopupExtender runat="server" ID="mpeEmail" TargetControlID="btnEmailDummy" BackgroundCssClass="mpeBack"
 	 CancelControlID="btnCerrarEmail" PopupControlID="pnlEmail" />
 	<asp:Panel runat="server" ID="pnlEmail" style="text-align: center; margin-right: 6px;" CssClass="ventana" Width="598px" BackColor="#DDDDDD">
@@ -191,4 +224,7 @@
 	</asp:Panel>
 	<asp:Button runat="server" ID="btnEmailDummy" style="display: none;"/>
 	<asp:Button runat="server" ID="btnPagarDummy" style="display: none;"/>
+      	<asp:Button runat="server" ID="btnCancelarDummy" style="display: none;" class="btn btn-primary"/>
+ 
+
 </asp:Content>

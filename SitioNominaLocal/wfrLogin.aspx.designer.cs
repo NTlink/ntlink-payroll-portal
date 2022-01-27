@@ -31,58 +31,13 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.LinkButton btnOlvidar1;
         
         /// <summary>
-        /// Control div1.
+        /// Control divPasswordChange.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div1;
-        
-        /// <summary>
-        /// Control UpdatePanel5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
-        /// <summary>
-        /// Control btnShow7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnShow7;
-        
-        /// <summary>
-        /// Control mpePasswordChange.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpePasswordChange;
-        
-        /// <summary>
-        /// Control PanelBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelBuscar;
-        
-        /// <summary>
-        /// Control Label30.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label30;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPasswordChange;
         
         /// <summary>
         /// Control txtOlvide.
@@ -103,15 +58,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valOlvide;
         
         /// <summary>
-        /// Control Label2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
         /// Control txtRfcOlvide.
         /// </summary>
         /// <remarks>
@@ -130,15 +76,6 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRfc;
         
         /// <summary>
-        /// Control UpdatePanel3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
-        /// <summary>
         /// Control lblMensajePass.
         /// </summary>
         /// <remarks>
@@ -148,31 +85,13 @@ namespace GafLookPaid {
         protected global::System.Web.UI.WebControls.Label lblMensajePass;
         
         /// <summary>
-        /// Control HiddenField6.
+        /// Control btnEnviarPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField6;
-        
-        /// <summary>
-        /// Control Enviar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Enviar;
-        
-        /// <summary>
-        /// Control btnNo7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNo7;
+        protected global::System.Web.UI.WebControls.Button btnEnviarPass;
         
         /// <summary>
         /// Control mpeCambiarPassword.

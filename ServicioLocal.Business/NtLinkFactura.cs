@@ -536,7 +536,7 @@ namespace ServicioLocal.Business
                     if (!string.IsNullOrEmpty(dto.receptor.Puesto))
                         nomina.Receptor.Puesto = dto.receptor.Puesto;
 
-                    if (!string.IsNullOrEmpty(dto.receptor.RiesgoPuesto.ToString()))
+                    if (!string.IsNullOrEmpty(dto.receptor.RiesgoPuesto))
                     {
                         c_RiesgoPuesto myRiesgoPuesto;
                         Enum.TryParse("Item" + dto.receptor.RiesgoPuesto.ToString(), out myRiesgoPuesto);

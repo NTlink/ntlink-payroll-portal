@@ -20,10 +20,6 @@
       
     }
 </style>
-     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-      <link href="Content/bootstrap.css" rel="stylesheet" />
-      <script src="Scripts/chosen.jquery.js" ></script>
-     
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" t>
     

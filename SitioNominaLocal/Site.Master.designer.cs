@@ -13,15 +13,6 @@ namespace GafLookPaid {
     public partial class SiteMaster {
         
         /// <summary>
-        /// Control Head1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
-        
-        /// <summary>
         /// Control HeadContent.
         /// </summary>
         /// <remarks>
@@ -38,24 +29,6 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager smGlobal;
-        
-        /// <summary>
-        /// Control updateSaldos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateSaldos;
-        
-        /// <summary>
-        /// Control hfTiempo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfTiempo;
         
         /// <summary>
         /// Control lblNombreUsuario.

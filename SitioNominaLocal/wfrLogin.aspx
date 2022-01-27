@@ -3,79 +3,74 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
   
-
-     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-      <link href="Content/bootstrap.css" rel="stylesheet" />
-      <script src="Scripts/chosen.jquery.js" ></script>
-      <script src="Scripts/bootstrapcdn-v3-4-0-bootstrap.min.js"></script>
-     <link href="Content/Mensajes.css" rel="stylesheet" />
-     <link href="Content/UpdateProgress.css" rel="stylesheet" />
+<link href="~/Styles/SiteLogin.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
   
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />--%>
-    
-     <link rel="stylesheet" href="Content/bootstrapcdnv3-4-0-bootstrap.min.css" />
-    <script src="Scripts/v3-3-3-1-jquery.min.js"></script>
-    <script src="Scripts/bootstrapcdn-v3-4-0-bootstrap.min.js"></script>
-     <link rel="stylesheet" href="Content/font-awesome.css"/>
-        
-   
+     <link href="Styles/StyleBoton.css" rel="stylesheet" type="text/css" />
    	<div align="center">
-	       
+	       <h1></h1>
            </br>
 				<asp:Login ID="logMain" CssClass="login" runat="server" 
-                LoginButtonText="Iniciar Sesión" LoginButtonType="Button" LoginButtonStyle-CssClass= "btn btn-outline-success" BorderWidth="0px"
+                LoginButtonText="Iniciar Sesión" LoginButtonType="Button" LoginButtonStyle-CssClass="btn btn-primary" BorderWidth="0px"
                 TextLayout="TextOnTop" Width="353px"  Height="133px"
                 DisplayRememberMe="False" FailureText="* Error de Inicio de Sesión."  
                 PasswordLabelText="Contraseña" PasswordRequiredErrorMessage="*Requerido" TitleText="" 
                 UserNameLabelText="Nombre de usuario:" UserNameRequiredErrorMessage="* Requerido" onauthenticate="logMain_Authenticate" BorderStyle= "solid"
-                DestinationPageUrl="Default.aspx"  
-                    style="text-align: center;"  BorderColor="#0D0D0D" ForeColor="#000000"  
-               BackColor="#99ff66">
+                DestinationPageUrl="Default.aspx"  >
                           
                 <LayoutTemplate>
-        <br />            
-    <div class="row center-block" >
-
-        <div class="form-group  col-lg-12"">
-
-                        <div class="input-group margin-bottom-sm">
-                             <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"  aria-hidden="true"></i></span>
-                             <asp:TextBox ID="UserName" runat="server" type="email" class="form-control" placeholder="Email" required= "True"></asp:TextBox>
-                         
-                        </div>
-                        </div>
-                        
-                    
-                        <div class="form-group col-lg-12">
-                             <div class="input-group ">
-                              <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                             <span class="input-group-append">
-                             <asp:TextBox ID="Password" runat="server" type="password" class="form-control" placeholder="Password" required= "True">
-                                   </asp:TextBox>
-                              <button id="show_password" class="btn btn-success" type="button" onclick="mostrarPassword()"> 
-                                  <i class="fa fa-eye-slash icon"  style="font-size:18px"></i>
-                              </button> 
-                             </span>
-                           
-                         </div>
-                    </div>
-
-                    </div>
-    <div class="row" >
-        <div class="col-lg-11  text-danger">
-                                            <asp:Literal ID="FailureText" runat="server" EnableViewState="False" ></asp:Literal>
-                              </div>
-        </div>
-    <div class="row" >
-        <div class="col-lg-11">                                            <asp:LinkButton ID="LoginLinkButton" runat="server" CommandName="Login" 
-                                                CssClass="btn btn-outline-success" ValidationGroup="logMain">Iniciar Sesión</asp:LinkButton>
-                           
-               </div>
-        </div>
-                    </LayoutTemplate>
+                    <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
+                        <tr>
+                            <td>
+                                <table cellpadding="0" style="height:167px; width:353px;">
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Nombre de usuario:</asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:TextBox ID="UserName" runat="server"  BorderWidth="1px"  
+                                                CssClass="form-control2" Width="85%"
+                                                ></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" 
+                                                ControlToValidate="UserName" ErrorMessage="* Requerido" ToolTip="* Requerido" 
+                                                ValidationGroup="logMain">*</asp:RequiredFieldValidator>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Contraseña</asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:TextBox ID="Password" runat="server" BorderWidth="1px"  
+                                                CssClass="form-control2" TextMode="Password" Width="85%"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" 
+                                                ControlToValidate="Password" ErrorMessage="*Requerido" ToolTip="*Requerido" 
+                                                ValidationGroup="logMain">*</asp:RequiredFieldValidator>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="color:Red;">
+                                            <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" style="text-align: center">
+                                            <asp:LinkButton ID="LoginLinkButton" runat="server" CommandName="Login" 
+                                               CssClass="btn btn-primary"  ValidationGroup="logMain">Iniciar Sesión</asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </LayoutTemplate>
             
                 <TextBoxStyle BorderWidth="1px" Width="80%" />
             </asp:Login>
@@ -92,94 +87,39 @@
             </div>
 		
 	</div>
-
-
-
-    
-    <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
-             <ContentTemplate>
-	<asp:Button ID="btnShow7" runat="server" Style="display:none"  Text="Show Modal Popup" />
-     <asp:ModalPopupExtender ID="mpePasswordChange" runat="server" PopupControlID="PanelBuscar"
-         TargetControlID="btnShow7"   BackgroundCssClass="modalBackground">
-    </asp:ModalPopupExtender>
-
-    <asp:Panel ID="PanelBuscar" runat="server" CssClass="modalPopup" Style="display: none">
-    
-        <div class="header" >
-           Cambiar Password
-        </div>
-        <div class="body">
+    <div runat="server" ID="divPasswordChange" Visible="False" align="center" >
         
-            <br />
-                <div class = "row">
-                    <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                  <asp:Label ID="Label30" class="control-label" runat="server" Text="Correo"></asp:Label>
-                     <asp:TextBox runat="server" ID="txtOlvide" ValidationGroup="vgOlvide" 
-                     CssClass="form-control" ></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOlvide" ID="valOlvide"
-                  ErrorMessage="Campo Obligatorio" Display="Dynamic" ValidationGroup="vgOlvide" ForeColor="Red">
-                </asp:RequiredFieldValidator>
+        <table>
+            <tr>
+                <td class="auto-style8">
+                    Email:
+                    </td> <td class="auto-style9"><asp:TextBox runat="server" ID="txtOlvide" ValidationGroup="vgOlvide" Width="190px"></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOlvide" ID="valOlvide" ErrorMessage="Campo Obligatorio" Display="Dynamic" ValidationGroup="vgOlvide"></asp:RequiredFieldValidator>
                               
-             
-                        </div>
-                    </div>
-             <div class = "row">
-                    <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                  <asp:Label ID="Label2" class="control-label" runat="server" Text="RFC"></asp:Label>
-                    <asp:TextBox runat="server" ID="txtRfcOlvide" CssClass="form-control" />
-                      <asp:RequiredFieldValidator runat="server" ID="valRfc" ControlToValidate="txtRfcOlvide" 
-                          ErrorMessage="Campo Obligatorio" Display="Dynamic" ValidationGroup="vgOlvide" ForeColor="Red">
-
-                      </asp:RequiredFieldValidator>
-              
-               </div>
-
-                 </div>
-            
-            
-        </div>
-        <div class="footer" >
-                   
-
-    <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
-             <ContentTemplate>
-     <div class = "row">
-                    <div class = "col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                             <asp:Label runat="server" ID="lblMensajePass" Visible="False" ForeColor="Red"></asp:Label>
-               
-            </div>
-                 </div>
-          
-                 <br />
-         <asp:HiddenField ID="HiddenField6" runat="server" />
-            <asp:LinkButton ID="Enviar"  Text="Enviar" CssClass="btn btn-outline-success" ValidationGroup="vgOlvide" OnClick="btnEnviarPass_Click"  runat="server" >
-                           
-                                </asp:LinkButton>
-               <%--<asp:Button runat="server" ID="btnEnviarPass" Text="Enviar" ValidationGroup="vgOlvide"
-            onclick="btnEnviarPass_Click" class="btn btn-outline-success"/>--%>
-             <asp:Button ID="btnNo7" runat="server" Text="Cancelar" OnClick="btnNo7_Click" CssClass="btn btn-outline-success" />
-     </ContentTemplate>
-             <Triggers>
-                 <%--   <asp:PostBackTrigger  ControlID="Enviar" />
-                 --%>
-                   <asp:AsyncPostBackTrigger  ControlID="Enviar" EventName="Click" />
-                 </Triggers>
-         </asp:UpdatePanel>   
-
-                 
-        </div>
-                 
-	      
-    </asp:Panel>
-                 </ContentTemplate>
-        </asp:UpdatePanel>
-                 
-
-
-
-	<asp:ModalPopupExtender runat="server" ID="mpeCambiarPassword" TargetControlID="btnPasswordDummy"  BackgroundCssClass="modalBackground"
+                          </td>
+            </tr>
+            <tr>
+                <td class="auto-style8">
+                    RFC:                    
+                </td>
+                <td class="auto-style9">
+                          <asp:TextBox runat="server" ID="txtRfcOlvide" Width="189px" />
+                      <asp:RequiredFieldValidator runat="server" ID="valRfc" ControlToValidate="txtRfcOlvide" ErrorMessage="Campo Obligatorio" Display="Dynamic" ValidationGroup="vgOlvide"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            </br>
+            <tr>
+                <td colspan="2">
+                    <asp:Label runat="server" ID="lblMensajePass" Visible="False"></asp:Label>
+                                   </td>
+            </tr>
+        </table>
+        <asp:Button runat="server" ID="btnEnviarPass" Text="Enviar" ValidationGroup="vgOlvide" class="btn btn-primary"
+            onclick="btnEnviarPass_Click" />
+    </div>
+	<asp:ModalPopupExtender runat="server" ID="mpeCambiarPassword" TargetControlID="btnPasswordDummy" BackgroundCssClass="mpeBack"
 	 CancelControlID="btnCerrarPassword" PopupControlID="pnlCambiarPassword" />
-	<asp:Panel runat="server" ID="pnlCambiarPassword" CssClass="modalPopup" style="text-align: center;" Width="800px" BackColor="White">
+	<asp:Panel runat="server" ID="pnlCambiarPassword" style="text-align: center;" Width="800px" BackColor="White">
 		<h1>Cambiar Password</h1>
 		<asp:Label runat="server" ID="lblUserIdCambiarPassword" Visible="False" />
 		Es la primera vez que accedes al sitio, es necesario que cambies tu password.
@@ -769,6 +709,4 @@
 		
 	</asp:Panel>
 	<asp:Button runat="server" ID="btnPasswordDummy" style="display: none;"/>
-
-           </div>
 </asp:Content>

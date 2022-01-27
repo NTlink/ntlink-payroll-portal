@@ -72,13 +72,13 @@ namespace ClienteNtLink
 
         }
         
-        public string CancelaCfdi(string uuid, string rfcEmisor, string expresion, string rfcReceptor)
+        public string CancelaCfdi(string uuid,string motivo,string folioSustituto, string rfcEmisor, string expresion, string rfcReceptor)
         {
             CertificadorClient cliente = new CertificadorClient();
             string result;
             try
             {
-                result = cliente.CancelaCfdi(uuid, rfcEmisor, expresion, rfcReceptor);
+                result = cliente.CancelaCfdi(uuid,motivo,folioSustituto, rfcEmisor, expresion, rfcReceptor);
             }
             catch (FaultException ee)
             {
