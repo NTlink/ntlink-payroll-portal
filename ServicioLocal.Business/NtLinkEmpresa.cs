@@ -10,8 +10,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using ServicioLocalContract;
 using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.StorageClient;
-using ServicioLocalContract;
 using System.Web;
 
 namespace ServicioLocal.Business

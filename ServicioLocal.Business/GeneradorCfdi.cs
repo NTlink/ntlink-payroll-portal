@@ -18,7 +18,6 @@ using System.Xml.Serialization;
 using ClienteNtLink;
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Render;
-using MessagingToolkit.QRCode.Codec;
 using ServicioLocal.Business.ReportExecution;
 using ServicioLocal.Business.ReportService;
 using ServicioLocalContract;

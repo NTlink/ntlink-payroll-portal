@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace GafLookPaid {
-    
-    
-    public partial class SiteMaster {
-        
+namespace GafLookPaid
+{
+
+
+    public partial class SiteMaster
+    {
+
         /// <summary>
         /// Control HeadContent.
         /// </summary>
@@ -20,7 +22,7 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
-        
+
         /// <summary>
         /// Control smGlobal.
         /// </summary>
@@ -29,7 +31,16 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager smGlobal;
-        
+
+        /// <summary>
+        /// Control hfTiempo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTiempo;
+
         /// <summary>
         /// Control lblNombreUsuario.
         /// </summary>
@@ -38,7 +49,7 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
-        
+
         /// <summary>
         /// Control lblEmpresa.
         /// </summary>
@@ -47,7 +58,16 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmpresa;
-        
+
+        /// <summary>
+        /// Control lblUserId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserId;
+
         /// <summary>
         /// Control NavigationMenu.
         /// </summary>
@@ -56,7 +76,7 @@ namespace GafLookPaid {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Menu NavigationMenu;
-        
+
         /// <summary>
         /// Control MainContent.
         /// </summary>

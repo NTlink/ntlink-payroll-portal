@@ -41,18 +41,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\Lib\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\..\..\ntlink-payroll-portal-main\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\Lib\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\ntlink-payroll-portal-main\packages\EPPlus.5.8.4\lib\net45\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, PublicKeyToken=e8a75d24b142be49, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Gma.QrCodeNet.Encoding.dll</HintPath>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>..\..\..\ntlink-payroll-portal-main\packages\Gma.QrCodeNet.0.4.1.2\lib\net40\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\ntlink-payroll-portal-main\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
