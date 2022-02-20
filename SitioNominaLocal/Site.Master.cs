@@ -18,6 +18,7 @@ namespace GafLookPaid
             {                
                 this.lblEmpresa.Text = Session["razonSocial"] as string;
                 this.lblNombreUsuario.Text = Session["nombre"] as string;
+                this.lblUserId.Text = Convert.ToString(Session["userId"]).ToUpper();
 
                 var perfil = Session["perfil"] as string;
                 if (perfil != "Administrador")

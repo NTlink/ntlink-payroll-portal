@@ -43,29 +43,30 @@
             <div>
               <div style="height: 26px;  background-image: url('images/top_franja.png'); background-size: 95%; width: 100%; background-position:center;">
                 <td>
-                    <table style="height: 90% ;  text-align: right; width: 100%; margin-left: 3px;" 
-                    class="page6"  >
-                    <tr>
-                      <td>
-                                        <div ID="tiempoCliente"  class="Reloj">
-                                            
-                                        </div>
-                                        <asp:HiddenField ID="hfTiempo" runat="server" ClientIDMode="Static" />
-                                    </td>
-                         
-                                       <td>
-                                Usuario:
+                    <table style="height: 90%; text-align: right; width: 100%; margin-left: 3px;"
+                        class="page6">
+                        <tr>
+                            <td>
+                                <div id="tiempoCliente" class="Reloj">
+                                </div>
+                                <asp:HiddenField ID="hfTiempo" runat="server" ClientIDMode="Static" />
+                            </td>
+
+                            <td>Usuario:
                                 <asp:Label runat="server" ID="lblNombreUsuario" Font-Size="10pt" />
                                 &nbsp;&nbsp;
                                 <br />
                                 Empresa:
                                 <asp:Label runat="server" ID="lblEmpresa" Font-Size="10pt" />
+                                <br />
+                                Id Usuario:
+                                <asp:Label runat="server" ID="lblUserId" Font-Size="10pt" Style="text-transform: uppercase" />
                                 &nbsp;&nbsp;
                             </td>
-                                       
-                                      
-                                </tr>
-                                           </table>
+
+
+                        </tr>
+                    </table>
             </div>
 <br />
  <div class="navbar navbar-expand-lg navbar-light bg-light">

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.StorageClient;
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage.Table;
 using System.IO;
