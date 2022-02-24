@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
 using System.Xml;
 using System.Xml.Xsl;
 using System.IO;
@@ -44,22 +43,22 @@ namespace ConsoleApplication1
 
     public class LocalFileResolver : XmlUrlResolver
     {
-        public override Uri ResolveUri(Uri baseUri, string relativeUri)
-        {
-            //var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Xsl");
-            //return base.ResolveUri(new Uri(path + "\\"), relativeUri);
+        //public override Uri ResolveUri(Uri baseUri, string relativeUri)
+        //{
+        //    //var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Xsl");
+        //    //return base.ResolveUri(new Uri(path + "\\"), relativeUri);
 
-            string StorageConnString = "DefaultEndpointsProtocol=https;AccountName=pruebasntlink;AccountKey=yUYfFTVXfHt/5/6gs2EVNL/0E9yu8fbprgPYSKW4NEGv3YHaWoarlHAyj5OXdYOr4rs9KATT0NMRShm8B8EH/A==";
-            CloudStorageAccount StorageAccount = CloudStorageAccount.Parse(StorageConnString);
-            var blobStorageClient = StorageAccount.CreateCloudBlobClient();
-            var container = blobStorageClient.GetContainerReference("cfdi-files");
-            var blobs = container.ListBlobs("cadenaoriginal_TFD_1_0.xslt").ToList();
-            var xsl = blobs.FirstOrDefault().StorageUri.ToString();
+        //    string StorageConnString = "DefaultEndpointsProtocol=https;AccountName=pruebasntlink;AccountKey=yUYfFTVXfHt/5/6gs2EVNL/0E9yu8fbprgPYSKW4NEGv3YHaWoarlHAyj5OXdYOr4rs9KATT0NMRShm8B8EH/A==";
+        //    CloudStorageAccount StorageAccount = CloudStorageAccount.Parse(StorageConnString);
+        //    var blobStorageClient = StorageAccount.CreateCloudBlobClient();
+        //    var container = blobStorageClient.GetContainerReference("cfdi-files");
+        //    var blobs = container.ListBlobs("cadenaoriginal_TFD_1_0.xslt").ToList();
+        //    var xsl = blobs.FirstOrDefault().StorageUri.ToString();
 
-            //return base.ResolveUri(new Uri(path + "\\"), relativeUri);
-            return base.ResolveUri(new Uri(System.IO.Path.GetDirectoryName(xsl).ToString() + "/"),System.IO.Path.GetFileName(xsl));
+        //    //return base.ResolveUri(new Uri(path + "\\"), relativeUri);
+        //    return base.ResolveUri(new Uri(System.IO.Path.GetDirectoryName(xsl).ToString() + "/"),System.IO.Path.GetFileName(xsl));
 
-        }
+        //}
     }
 
 }

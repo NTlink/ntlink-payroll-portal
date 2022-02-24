@@ -6,11 +6,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Asn1.Pkcs;
 using Org.BouncyCastle.Crypto.Parameters;
+//using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
+//using Org.BouncyCastle.Asn1.Pkcs;
+//using Org.BouncyCastle.Crypto.Parameters;
 
 
 #endregion

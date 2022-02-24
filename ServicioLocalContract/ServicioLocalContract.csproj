@@ -41,16 +41,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\SitioNominaLocal\bin\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\packages\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\SitioNominaLocal\bin\EPPlus.dll</HintPath>
+      <HintPath>..\packages\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\SitioNominaLocal\bin\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\SitioNominaLocal\bin\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -109,6 +109,7 @@
     <Compile Include="SidetecStringWriter.cs" />
     <Compile Include="UsuarioLocal.cs" />
     <Compile Include="ValidadorContract.cs" />
+    <Compile Include="X509CertificateStructure.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="NtLinkLocalModel.edmx">
