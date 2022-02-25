@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using ServicioLocalContract;
-using Microsoft.WindowsAzure;
 using System.Web;
 
 namespace ServicioLocal.Business

@@ -12,7 +12,6 @@ namespace ServicioLocal.Business
 {
     public class NtLinkUsuarios : NtLinkBusiness
     {
-
         public bool RecuperarMail(string rfc, string email)
         {
             try
